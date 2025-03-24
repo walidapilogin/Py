@@ -651,8 +651,8 @@ class Proxy:
             pass
     
 
-def start_bot():
+def start_script():
     proxy = Proxy()
     proxy.run("127.0.0.1", 3000)
 
-start_bot()
+start_script()

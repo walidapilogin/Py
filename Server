@@ -654,5 +654,3 @@ class Proxy:
 def start_bot():
     proxy = Proxy()
     proxy.run("127.0.0.1", 3000)
-
-start_bot()

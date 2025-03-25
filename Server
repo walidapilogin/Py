@@ -16,8 +16,8 @@ squad = False
 hide=None
 class Proxy:
     def __init__(self):
-        self.username = "bot"
-        self.password = "bot"
+        self.username = "username"
+        self.password = "password"
         self.spam_level=False
         self.spam_chat= False
         self.botcomendenable=False
@@ -379,7 +379,7 @@ class Proxy:
     def udp_server(self):
     
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        server_address = ('127.0.0.1', 1234)  
+        server_address = ('127.0.0.1', 3000)  
         sock.bind(server_address)
         # Listen for incoming datagrams
         print(f'Server listening on {server_address}')
@@ -654,4 +654,5 @@ class Proxy:
 def start_bot():
     proxy = Proxy()
     proxy.run("127.0.0.1", 3000)
-start_bot():
+
+start_bot()

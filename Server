@@ -6,7 +6,7 @@ import socket
 import threading
 import select
 import requests
-
+print("works")
 
 
 SOCKS_VERSION = 5

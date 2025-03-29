@@ -16,8 +16,8 @@ squad = False
 hide=None
 class Proxy:
     def __init__(self):
-        self.username = "username"
-        self.password = "password"
+        self.username = "Ghost"
+        self.password = "JEEF13"
         self.spam_level=False
         self.spam_chat= False
         self.botcomendenable=False

@@ -630,6 +630,4 @@ class Proxy:
 def start_bot():
     proxy = Proxy()
     proxy.run("127.0.0.1", 1999)
-if __name__ == "__main__":
-    Get_bot_Code()
-    start_bot()
+start_bot()

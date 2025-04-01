@@ -619,8 +619,8 @@ class Proxy:
     def PFPFOX(self):
         while self.Profile_Fox==True:
             try:
-                self.spam_ip_39698.send(bytes.fromhex("080000001608edaae28710100820022a0a08bfda5b10fe7d18c801"))
-                self.spam_ip_39698.send(bytes.fromhex("080000001608edaae28710100820022a0a08e7be0110b24f18c801"))
+                self.client0500.send(bytes.fromhex("080000001608edaae28710100820022a0a08bfda5b10fe7d18c801"))
+                self.client0500.send(bytes.fromhex("080000001608edaae28710100820022a0a08e7be0110b24f18c801"))
 
             except Exception as e:
                 print("[+]Exception on :"+str(e))

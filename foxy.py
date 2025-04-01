@@ -309,8 +309,7 @@ class Proxy:
             if b"/sqoud6" in data:   #OP3
                 print("Hhhh")
             if b"/backsqd" in data:   #OP4
-                try:
-                    self.spam_ip_39698.send(self.data_join)
+                self.spam_ip_39698.send(self.data_join)
                 # except Exception as e:
                     # print("[+]Exception on :"+str(e))
             if b"/backspam" in data:  #OP5
@@ -343,17 +342,17 @@ class Proxy:
             if b"OP2" in data:
                 sock.sendto("OFF".encode(),addreOP)
             if b"OP3" in data:
-                sock.sendto("ON".encode(),addreOP)
+                sock.sendto("OFF".encode(),addreOP)
             if b"OP4" in data:
                 sock.sendto("ON".encode(),addreOP)
             if b"OP5" in data:
                 sock.sendto("ON".encode(),addreOP)
             if b"OP6" in data:
-                sock.sendto("OFF".encode(),addreOP)
+                sock.sendto("ON".encode(),addreOP)
             if b"OP7" in data:
-                sock.sendto("OFF".encode(),addreOP)
+                sock.sendto("ON".encode(),addreOP)
             if b"OP8" in data:
-                sock.sendto("OFF".encode(),addreOP)
+                sock.sendto("ON".encode(),addreOP)
             if b"OP9" in data:
                 sock.sendto("ON".encode(),addreOP)
             if b"OP10" in data:

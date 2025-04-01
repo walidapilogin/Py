@@ -415,15 +415,15 @@ class Proxy:
                 self.Like=False
         #----<<<Options>>>----
             if b"OP1" in data:
-                sock.sendto("ON".encode(),addreOP)
+                sock.sendto("OFF".encode(),addreOP)
             if b"OP2" in data:
                 sock.sendto("OFF".encode(),addreOP)
             if b"OP3" in data:
-                sock.sendto("ON".encode(),addreOP)
+                sock.sendto("OFF".encode(),addreOP)
             if b"OP4" in data:
-                sock.sendto("ON".encode(),addreOP)
+                sock.sendto("OFF".encode(),addreOP)
             if b"OP5" in data:
-                sock.sendto("ON".encode(),addreOP)
+                sock.sendto("OFF".encode(),addreOP)
             if b"OP6" in data:
                 sock.sendto("ON".encode(),addreOP)
             if b"OP7" in data:

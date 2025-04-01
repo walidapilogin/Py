@@ -16,8 +16,8 @@ squad = False
 hide=None
 class Proxy:
     def __init__(self):
-        self.username = "Ghost"
-        self.password = "JEEF13"
+        self.username = "FOXY"
+        self.password = "BOT"
         self.spam_level=False
         self.spam_chat= False
         self.botcomendenable=False
@@ -653,5 +653,5 @@ class Proxy:
 
 def start_bot():
     proxy = Proxy()
-    proxy.run("127.0.0.1", 3000)
+    proxy.run("127.0.0.1", 1999)
 start_bot()

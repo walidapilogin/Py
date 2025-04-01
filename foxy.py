@@ -167,11 +167,13 @@ class Proxy:
                         b.start()
 
                 #Get ip 4 spam
+                if "39698" in str(client) :
+                    self.spam_ip_39698 = client
                 if "39698" in str(remote) :
-                    self.spam_ip_39698 = remote
-                if "39800" in str(remote) :
                     self.spam_ip_39800=remote
                     
+                    
+                
                     
           
                     
@@ -283,6 +285,7 @@ class Proxy:
   
                 #----Spy Packet----
                 if  '0500' in data.hex()[0:4]  : 
+                    self.client0500 = client
                     if len(data.hex())<=60:
             
                         pass

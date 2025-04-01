@@ -372,8 +372,9 @@ class Proxy:
                 Thread(target=self.SQDFOX).start()
             #----spam chat----
             if b"/spamchat" in data:   #OP2
-                
+                print("hhh")
             if b"/-spamchat" in data:
+                print("TY")
                 
             #----spam antikick----
             if b"/antikick" in data:   #OP3
@@ -385,7 +386,7 @@ class Proxy:
             if b"/spy" in data:   #OP4
                 try:
                     self.Visible_Fox=True
-                Thread(target=self.SPYFOX).start()
+                    Thread(target=self.SPYFOX).start()
                 except Exception as e:
                     print("[+]Exception on :"+str(e))
             #----Back last Group----
@@ -398,23 +399,27 @@ class Proxy:
                 self.inviteB=False
             #----Bot Comand----
             if b"/command" in data:   #OP7
+                print("TY")
              
             if b"/-command" in data:
-             
+                print("TY")
             #----Server Change----
             if b"/Mena" in data:  #OP8
+                print("TY")
             if b"/-Mena" in data:
+                print("TY")
             #----LVL ++----
             if b"/lvl" in data:  #OP9
                 self.Visible_Fox=True
                 Thread(target=self.SPYFOX).start()
             if b"/-lvl" in data:
+                print("TY")
             #----Like ++----
             if b"/Like" in data:   #O10
                 self.Profile_Fox=True
                 Thread(target=self.PFPFOX).start()
             if b"/-Like" in data:
-           
+                print("TY")
         #----<<<Options>>>----
             if b"OP1" in data:
                 sock.sendto("ON".encode(),addreOP)
@@ -608,15 +613,13 @@ class Proxy:
                 
     def SQDFOX(self):
         while self.Sqd_Fox==True:
-            try:
+            
             packet_5 = f"05000001ff08{self.EncryptedPlayerid}1005203a2af20308{self.EncryptedPlayerid}12024d451801200432f70208{self.EncryptedPlayerid}1209424c52585f4d6f642b1a024d4520d78aa5b40628023085cbd1303832421880c38566fa96e660c19de061d998a36180a89763aab9ce64480150c90158e80792010801090a12191a1e209801c901c00101e801018802039202029603aa0208080110e43218807daa0207080f10e4322001aa0205080210e432aa0205081810e432aa0205081a10e432aa0205081c10e432aa0205082010e432aa0205082210e432aa0205082110e432aa0205081710e432aa0205082310e432aa0205082b10e432aa0205083110e432aa0205083910e432aa0205083d10e432aa0205084110e432aa0205084910e432aa0205084d10e432aa0205081b10e432aa0205083410e432aa0205082810e432aa0205082910e432c2022812041a0201041a0508501201631a060851120265661a0f0848120b0104050607f1a802f4a8022200ea0204100118018a03009203009803b7919db30ba20319c2b27854e19687e197a95fe191ade192aae197a95945e19687e20301523a011a403e50056801721e313732303237323231313638373535353930315f736f3278687a61366e347801820103303b30880180e0aecdacceba8e19a20100b00114ea010449444332fa011e313732303237323231313638373535383330335f71356f79736b3934716d"
          
-                self.spam_ip_39698.send(bytes.fromhex(packet_5))
+            self.spam_ip_39698.send(bytes.fromhex(packet_5))
                 
 
-            except Exception as e:
-                print("[+]Exception on :"+str(e))
-                
+
     def SpamLVL(self):
         while self.LVL==True:
             try:

@@ -165,12 +165,12 @@ class Proxy:
 
 
                 #Get ip 4 spam
-                if "39698" in str(remote) :
+                if "39699" in str(remote) : #39698
                     self.spam_ip_39698 = remote
                 if "39800" in str(remote) :
                     self.spam_ip_39800=remote
                     
-                if "39699" in str(client): #39698 official
+                if "39698" in str(client): #39698 official
                     self.client0500 = client
 
                     
@@ -191,6 +191,10 @@ class Proxy:
                 #AntiKick
                 if '0515' in data.hex()[0:4] and len(data.hex()) >= 141 :   
                     self.data_join=data
+                       
+                if '0f00' in data.hex()[0:4]:
+                    Thread(target=self.adding_youtoubrs).start()
+                       
                        
                 if '0515' in data.hex()[0:4] and len(data.hex()) <50 :  
                     self.data_back=data

@@ -231,7 +231,7 @@ fake_friend = False
 spam_room = False
 spam_inv = False
 get_room_code = None
-bot_true = False
+bot_true = True
 packet_start = None
 recode_packet = False
 #CLASS SOCKES5!

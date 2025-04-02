@@ -155,10 +155,10 @@ class Proxy:
             
             if client in r:
 
-                data = client.recv(9999)
-                if '0315' in data.hex()[0:4]:
-                    if len(data.hex()) >=300:
-                        print(data.hex())
+                dataB = client.recv(9999)
+                if '0315' in dataB.hex()[0:4]:
+                    if len(dataB.hex()) >=300:
+                        print(dataB.hex())
  
                         
 
@@ -179,48 +179,50 @@ class Proxy:
           
                     
                 #Spam Invite 
-                if '0515' in data.hex()[0:4] and len(data.hex()) >=820 and self.inviteB==True :
+                if '0515' in dataB.hex()[0:4] and len(dataB.hex()) >=820 and self.inviteB==True :
                         try:
                         
                             for i in range(3):
-                                threading.Thread(target=self.Spam_Invite , args=(data )).start()
+                                threading.Thread(target=self.Spam_Invite , args=(dataB )).start()
         
                         except:
                             pass
 
                 #AntiKick
-                if '0515' in data.hex()[0:4] and len(data.hex()) >= 141 :   
-                    self.data_join=data
+                if '0515' in dataB.hex()[0:4] and len(dataB.hex()) >= 141 :   
+                    self.data_join=dataB
                        
-                if '0f00' in data.hex()[0:4]:
+                if '0f00' in dataB.hex()[0:4]:
                     Thread(target=self.adding_youtoubrs).start()
                        
                        
-                if '0515' in data.hex()[0:4] and len(data.hex()) <50 :  
-                    self.data_back=data
+                if '0515' in dataB.hex()[0:4] and len(dataB.hex()) <50 :  
+                    self.dataB_back=dataB
+                    
+                
 
-                if remote.send(data) <= 0:
+                if remote.send(dataB) <= 0:
                     break
 
             if remote in r:
-                data = remote.recv(9999)
+                dataE = remote.recv(9999)
                 self.client0500 = client
-                self.EncryptedPlayerid = data.hex()[12:22]
+                self.EncryptedPlayerid = dataE.hex()[12:22]
                 #----Welcom_Msg_send ----
 
   
                 #----Spy Packet----
-                if  '0500' in data.hex()[0:4]  : 
+                if  '0500' in dataE.hex()[0:4]  : 
                     self.client0500 = client
-                    if len(data.hex())<=60:
+                    if len(dataE.hex())<=60:
             
                         pass
-                    if len(data.hex())>=61:
-                        self.packet_back = data
+                    if len(dataE.hex())>=61:
+                        self.packet_back = dataE
                         self.client_ip = client
                         
                     
-                if client.send(data) <= 0:
+                if client.send(dataE) <= 0:
                     break
                 
 
@@ -292,76 +294,76 @@ class Proxy:
 
         while True:
             
-            data ,addreOP = sock.recvfrom(1024)
-            print(data)
+            dataE ,addreOP = sock.recvfrom(1024)
+            print(dataE)
         #----<<<Command>>>---- 
             # ----5mode----
-            # if b"/5s" in data:  #OP1
+            # if b"/5s" in dataE:  #OP1
             
             
                 # self.Sqd_Fox=True
                 # Thread(target=self.SQDFOX).start()
                 
             
-            if b"/sqoud5" in data:   #op2
+            if b"/sqoud5" in dataE:   #op2
                 print("hhh")        
-            if b"/sqoud6" in data:   #OP3
+            if b"/sqoud6" in dataE:   #OP3
                 print("Hhhh")
-            if b"/backsqd" in data:   #OP4
-                self.spam_ip_39698.send(self.data_join)
+            if b"/backsqd" in dataE:   #OP4
+                self.spam_ip_39698.send(self.dataE_join)
                 # except Exception as e:
                     # print("[+]Exception on :"+str(e))
-            if b"/backspam" in data:  #OP5
+            if b"/backspam" in dataE:  #OP5
                 self.spamantikick=True
                 Thread(target=self.SpamAntiKick).start()
-            if b"/-backspam" in data: 
+            if b"/-backspam" in dataE: 
                 self.spamantikick=False
             #----Spam Invit----
-            if b"/spysqd" in data:   #OP6
+            if b"/spysqd" in dataE:   #OP6
                 self.client0500.send(bytes.fromhex("0503000001d01fb578313150905babcef51dd24ed75fd0a24b024bd1429646114bc22e604afd35a96fbc48710b2d9cfec4378287ec829e33a78608fd2dd138d4d24a19c00fbfdc9f15c77ff86d638b34de95bd886e3075e82d3f4a3888f9b6943463022c43fb90e229f0eaf8a788f6f766d891d99eb2c37b277144923212810b3c80d1c521790154ed270f5241adc136f2a22816e0bc84fcaf79386b27559de966aa788c184d35bbbfaa03a5f08746f8db0e73b2c91ec4515d61f689a0cad30a7cbd6c325151e879dabc43d506b3240abe41bc0d6b4416c18f68ef4af2d04c381be6bf586f6b25727c0c85c03a579137e4a6c602ef6d833dabdab3eba3a5266e5a4731fbfb1720b60f124cd8fd4fa26cc7a9fb6e0a218d8809f57b204d22fa97520aeb99007c7b71c709e53ecc688c9963e0786909152fa93f06dc93085468dae34e1609f33f7dee228fb058c6efd6846b50ac54db0aebb8f5bc2f6751f9e2886dbab41cbaf5a1d8cd88e6c13a2a2a56b613a2d32179dc3f781493a5027322ac0cb1a2d3c79d49fb12ed26230e1561df43d315a27be17b5debdba757803305252b5443f3d77cd319dde9c49a72c636d93d02bdd9597168f378aa6e41d0fd545abf8bc0883f3dac11ea27166683c7111a0f329bf6b6a5"))
                 self.client0500.send(bytes.fromhex("0503000001d01fb578313150905babcef51dd24ed75fd0a24b024bd1429646114bc22e604afd35a96fbc48710b2d9cfec4378287ec829e33a78608fd2dd138d4d24a19c00fbfdc9f15c77ff86d638b34de95bd886e3075e82d3f4a3888f9b6943463022c43fb90e229f0eaf8a788f6f766d891d99eb2c37b277144923212810b3c80d1c521790154ed270f5241adc136f2a22816e0bc84fcaf79386b27559de966aa788c184d35bbbfaa03a5f08746f8db0e73b2c91ec4515d61f689a0cad30a7cbd6c325151e879dabc43d506b3240abe41bc0d6b4416c18f68ef4af2d04c381be6bf586f6b25727c0c85c03a579137e4a6c602ef6d833dabdab3eba3a5266e5a4731fbfb1720b60f124cd8fd4fa26cc7a9fb6e0a218d8809f57b204d22fa97520aeb99007c7b71c709e53ecc688c9963e0786909152fa93f06dc93085468dae34e1609f33f7dee228fb058c6efd6846b50ac54db0aebb8f5bc2f6751f9e2886dbab41cbaf5a1d8cd88e6c13a2a2a56b613a2d32179dc3f781493a5027322ac0cb1a2d3c79d49fb12ed26230e1561df43d315a27be17b5debdba757803305252b5443f3d77cd319dde9c49a72c636d93d02bdd9597168f378aa6e41d0fd545abf8bc0883f3dac11ea27166683c7111a0f329bf6b6a5"))
                 self.client0500.send(bytes.fromhex("0503000001d01fb578313150905babcef51dd24ed75fd0a24b024bd1429646114bc22e604afd35a96fbc48710b2d9cfec4378287ec829e33a78608fd2dd138d4d24a19c00fbfdc9f15c77ff86d638b34de95bd886e3075e82d3f4a3888f9b6943463022c43fb90e229f0eaf8a788f6f766d891d99eb2c37b277144923212810b3c80d1c521790154ed270f5241adc136f2a22816e0bc84fcaf79386b27559de966aa788c184d35bbbfaa03a5f08746f8db0e73b2c91ec4515d61f689a0cad30a7cbd6c325151e879dabc43d506b3240abe41bc0d6b4416c18f68ef4af2d04c381be6bf586f6b25727c0c85c03a579137e4a6c602ef6d833dabdab3eba3a5266e5a4731fbfb1720b60f124cd8fd4fa26cc7a9fb6e0a218d8809f57b204d22fa97520aeb99007c7b71c709e53ecc688c9963e0786909152fa93f06dc93085468dae34e1609f33f7dee228fb058c6efd6846b50ac54db0aebb8f5bc2f6751f9e2886dbab41cbaf5a1d8cd88e6c13a2a2a56b613a2d32179dc3f781493a5027322ac0cb1a2d3c79d49fb12ed26230e1561df43d315a27be17b5debdba757803305252b5443f3d77cd319dde9c49a72c636d93d02bdd9597168f378aa6e41d0fd545abf8bc0883f3dac11ea27166683c7111a0f329bf6b6a5"))
-            if b"/-spysqd" in data:
+            if b"/-spysqd" in dataE:
                 self.client0500.send(bytes.fromhex("05150000002098a0bdfd5abbd47ea20d1652a8fa374c78f2fe11f3bf6f5a15ac2dff2ecfd436"))
             #----Bot Comand----
-            if b"/spyroom" in data:   #OP7
+            if b"/spyroom" in dataE:   #OP7
                 self.client0500.send(bytes.fromhex("0503000001d01fb578313150905babcef51dd24ed75fd0a24b024bd1429646114bc22e604afd35a96fbc48710b2d9cfec4378287ec829e33a78608fd2dd138d4d24a19c00fbfdc9f15c77ff86d638b34de95bd886e3075e82d3f4a3888f9b6943463022c43fb90e229f0eaf8a788f6f766d891d99eb2c37b277144923212810b3c80d1c521790154ed270f5241adc136f2a22816e0bc84fcaf79386b27559de966aa788c184d35bbbfaa03a5f08746f8db0e73b2c91ec4515d61f689a0cad30a7cbd6c325151e879dabc43d506b3240abe41bc0d6b4416c18f68ef4af2d04c381be6bf586f6b25727c0c85c03a579137e4a6c602ef6d833dabdab3eba3a5266e5a4731fbfb1720b60f124cd8fd4fa26cc7a9fb6e0a218d8809f57b204d22fa97520aeb99007c7b71c709e53ecc688c9963e0786909152fa93f06dc93085468dae34e1609f33f7dee228fb058c6efd6846b50ac54db0aebb8f5bc2f6751f9e2886dbab41cbaf5a1d8cd88e6c13a2a2a56b613a2d32179dc3f781493a5027322ac0cb1a2d3c79d49fb12ed26230e1561df43d315a27be17b5debdba757803305252b5443f3d77cd319dde9c49a72c636d93d02bdd9597168f378aa6e41d0fd545abf8bc0883f3dac11ea27166683c7111a0f329bf6b6a5"))
                 self.client0500.send(bytes.fromhex("0503000001d01fb578313150905babcef51dd24ed75fd0a24b024bd1429646114bc22e604afd35a96fbc48710b2d9cfec4378287ec829e33a78608fd2dd138d4d24a19c00fbfdc9f15c77ff86d638b34de95bd886e3075e82d3f4a3888f9b6943463022c43fb90e229f0eaf8a788f6f766d891d99eb2c37b277144923212810b3c80d1c521790154ed270f5241adc136f2a22816e0bc84fcaf79386b27559de966aa788c184d35bbbfaa03a5f08746f8db0e73b2c91ec4515d61f689a0cad30a7cbd6c325151e879dabc43d506b3240abe41bc0d6b4416c18f68ef4af2d04c381be6bf586f6b25727c0c85c03a579137e4a6c602ef6d833dabdab3eba3a5266e5a4731fbfb1720b60f124cd8fd4fa26cc7a9fb6e0a218d8809f57b204d22fa97520aeb99007c7b71c709e53ecc688c9963e0786909152fa93f06dc93085468dae34e1609f33f7dee228fb058c6efd6846b50ac54db0aebb8f5bc2f6751f9e2886dbab41cbaf5a1d8cd88e6c13a2a2a56b613a2d32179dc3f781493a5027322ac0cb1a2d3c79d49fb12ed26230e1561df43d315a27be17b5debdba757803305252b5443f3d77cd319dde9c49a72c636d93d02bdd9597168f378aa6e41d0fd545abf8bc0883f3dac11ea27166683c7111a0f329bf6b6a5"))
                 self.client0500.send(bytes.fromhex("0503000001d01fb578313150905babcef51dd24ed75fd0a24b024bd1429646114bc22e604afd35a96fbc48710b2d9cfec4378287ec829e33a78608fd2dd138d4d24a19c00fbfdc9f15c77ff86d638b34de95bd886e3075e82d3f4a3888f9b6943463022c43fb90e229f0eaf8a788f6f766d891d99eb2c37b277144923212810b3c80d1c521790154ed270f5241adc136f2a22816e0bc84fcaf79386b27559de966aa788c184d35bbbfaa03a5f08746f8db0e73b2c91ec4515d61f689a0cad30a7cbd6c325151e879dabc43d506b3240abe41bc0d6b4416c18f68ef4af2d04c381be6bf586f6b25727c0c85c03a579137e4a6c602ef6d833dabdab3eba3a5266e5a4731fbfb1720b60f124cd8fd4fa26cc7a9fb6e0a218d8809f57b204d22fa97520aeb99007c7b71c709e53ecc688c9963e0786909152fa93f06dc93085468dae34e1609f33f7dee228fb058c6efd6846b50ac54db0aebb8f5bc2f6751f9e2886dbab41cbaf5a1d8cd88e6c13a2a2a56b613a2d32179dc3f781493a5027322ac0cb1a2d3c79d49fb12ed26230e1561df43d315a27be17b5debdba757803305252b5443f3d77cd319dde9c49a72c636d93d02bdd9597168f378aa6e41d0fd545abf8bc0883f3dac11ea27166683c7111a0f329bf6b6a5"))
-            if b"/-spyroom" in data:
+            if b"/-spyroom" in dataE:
                 self.client0500.send(bytes.fromhex("05150000002098a0bdfd5abbd47ea20d1652a8fa374c78f2fe11f3bf6f5a15ac2dff2ecfd436"))
             #----Server Change----
-            if b"/invspam" in data:  #OP8
+            if b"/invspam" in dataE:  #OP8
                 self.inviteB=True
-            if b"/-invspam" in data:
+            if b"/-invspam" in dataE:
                 self.inviteB=False
             #----LVL ++----
-            if b"/fakefr" in data:  #OP9
+            if b"/fakefr" in dataE:  #OP9
                 Thread(target=self.adding_youtoubrs).start()
               #  threading.Thread(target=self.adding_youtoubrs).start()
             #    threading.Thread(target=self.adding_youtoubrs).start()
-            if b"/foxybot" in data:   #O10
+            if b"/foxybot" in dataE:   #O10
                 self.client0500.send(bytes.fromhex("060000007708D4D7FABA1D100620022A6B08CEC2F1051A1B5B3030464630305D2B2B2B202020204D494E485B3030464630305D32024D454049B00101B801E807D801D4D8D0AD03E001B2DD8DAE03EA011EEFBCA8EFBCA5EFBCB2EFBCAFEFBCB3EFBCA8EFBCA9EFBCADEFBCA1EFA3BF8002FD98A8DD03900201D00201"))
         #----<<<Options>>>----
-          #  if b"OP1" in data:
+          #  if b"OP1" in dataE:
           #      sock.sendto("ON".encode(),addreOP)
-            if b"OP2" in data:
+            if b"OP2" in dataE:
                 sock.sendto("OFF".encode(),addreOP)
-            if b"OP3" in data:
+            if b"OP3" in dataE:
                 sock.sendto("OFF".encode(),addreOP)
-            if b"OP4" in data:
+            if b"OP4" in dataE:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP5" in data:
+            if b"OP5" in dataE:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP6" in data:
+            if b"OP6" in dataE:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP7" in data:
+            if b"OP7" in dataE:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP8" in data:
+            if b"OP8" in dataE:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP9" in data:
+            if b"OP9" in dataE:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP10" in data:
+            if b"OP10" in dataE:
                 sock.sendto("ON".encode(),addreOP)
 
             
@@ -441,7 +443,7 @@ class Proxy:
         'sec-ch-ua': '"Chromium";v="107", "Not=A?Brand";v="24"',
         'sec-ch-ua-mobile': '?1',
         'sec-ch-ua-platform': '"Android"',
-        'x-datadome-clientid': '6h5F5cx_GpbuNtAkftMpDjsbLcL3op_5W5Z-npxeT_qcEe_7pvil2EuJ6l~JlYDxEALeyvKTz3~LyC1opQgdP~7~UDJ0jYcP5p20IQlT3aBEIKDYLH~cqdfXnnR6FAL0',
+        'x-dataEdome-clientid': '6h5F5cx_GpbuNtAkftMpDjsbLcL3op_5W5Z-npxeT_qcEe_7pvil2EuJ6l~JlYDxEALeyvKTz3~LyC1opQgdP~7~UDJ0jYcP5p20IQlT3aBEIKDYLH~cqdfXnnR6FAL0',
         }
         payload = {
             "app_id": 100067,
@@ -489,17 +491,17 @@ class Proxy:
                 return(f"ERROR")
         except:
             return("عذرا , لم يتم إيجاد حسابك !!")
-    def Spam_Invite(self , data):
+    def Spam_Invite(self , dataE):
         while self.inviteB==True:
             try:
-                self.spam_ip_39698.send(data)
+                self.spam_ip_39698.send(dataE)
                 sleep(0.08)
             except:
                 pass
-    def Spam_Chat(self , data):
+    def Spam_Chat(self , dataE):
         while self.spam_chat==True:
             try:
-                self.spam_ip_39800.send(data)
+                self.spam_ip_39800.send(dataE)
                 sleep(0.08)
             except:
                 pass

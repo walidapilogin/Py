@@ -163,7 +163,7 @@ class Proxy:
  
                         
 
-                if '0515' in dataC.hex()[0:4] or '23.90.158.22' in str(remote) :
+                if '0515' in data.hex()[0:4] or '23.90.158.22' in str(remote) :
                     self.spam_ip_39698 = remote
 
                 #Get ip 4 spam

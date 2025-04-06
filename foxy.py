@@ -883,7 +883,7 @@ class Proxy:
             #----Bot Comand----
             if b"/spyroom" in data:   #OP7
                 threading.Thread(target=self.squad_rom_invisible).start()
-                    threading.Thread(target=send_msg, args=(self.client1200, data.hex(), "[b][i][c][7cfc00] - Spy | AntiKick On", 0.2)).start()
+                threading.Thread(target=send_msg, args=(self.client1200, data.hex(), "[b][i][c][7cfc00] - Spy | AntiKick On", 0.2)).start()
             if b"/-spyroom" in data:
                 threading.Thread(target=send_msg, args=(self.client1200, data.hex(), f"[b][i][c][7cfc00] - Code Room : {get_room_code}\n By : CODEX TEAM&PARA HEX", 0.001)).start()
             #----Server Change----

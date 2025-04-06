@@ -638,8 +638,8 @@ class Proxy:
 
         while True:
             
-            dataS ,addreOP = sock.recvfrom(4096)
-            print(dataS)
+            dataS ,addreOP = sock.recvfrom(9999)
+         #   print(dataS)
         #----<<<Command>>>---- 
             # ----5mode----
             # if b"/5s" in dataS:  #OP1
@@ -676,10 +676,10 @@ class Proxy:
                 print("OFF")      
             #----Server Change----
             if b"/invspam" in dataS:  #OP8
-                spam_inv = True
+                self.spam_inv = True
                 self.client1200.send(bytes.fromhex(f"120000010108{self.EncryptedPlayerid}101220022af40108{self.EncryptedPlayerid}10{self.EncryptedPlayerid}224d0a5b625d5b695d5b635d5b3763666330305d202d200a5370616d20496e76697465204f6e20210a202d20456e6a6f792057697468205350616d0a202d204279203a20434f444558205445414d0a28a083cabd064a250a0b4f5554e385a4414c56494e10e7b290ae0320d20128c1b7f8b103420737526164616121520261726a640a5e68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f612f414367386f634a614d4363556f6c4355397148576c6c2d79506e76516d3354782d304630304d30596a633350437737326f7a44503d7339362d63100118017200"))
             if b"/-invspam" in dataS:
-                spam_inv = False
+                self.spam_inv = False
                 self.client1200.send(bytes.fromhex(f"120000010108{self.EncryptedPlayerid}101220022af40108{self.EncryptedPlayerid}10{self.EncryptedPlayerid}224d0a5b625d5b695d5b635d5b3763666330305d202d200a5370616d20496e76697465204f6e20210a202d20456e6a6f792057697468205350616d0a202d204279203a20434f444558205445414d0a28a083cabd064a250a0b4f5554e385a4414c56494e10e7b290ae0320d20128c1b7f8b103420737526164616121520261726a640a5e68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f612f414367386f634a614d4363556f6c4355397148576c6c2d79506e76516d3354782d304630304d30596a633350437737326f7a44503d7339362d63100118017200"))
             #----LVL ++----
             if b"/fakefr" in dataS:  #OP9

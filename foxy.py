@@ -644,6 +644,7 @@ class Proxy:
                 socktion.send(packet)
              #   threading.Thread(target=self.squad_rom_invisible).start()
             if b"/-spysqd" in dataS:
+                print("OFF")
            #     restart()
             #----Bot Comand----
             if b"/spyroom" in dataS:   #OP7
@@ -699,7 +700,7 @@ class Proxy:
                
             
 def start_bot():
-    try:.
+    try:
             proxy = Proxy()
             t = threading.Thread(target=proxy.run, args=("127.0.0.1", 1999))
             t.start()

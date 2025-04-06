@@ -638,76 +638,76 @@ class Proxy:
 
         while True:
             
-            data ,addreOP = sock.recvfrom(1024)
-            print(data)
+            dataS ,addreOP = sock.recvfrom(1024)
+            print(dataS)
         #----<<<Command>>>---- 
             # ----5mode----
-            # if b"/5s" in data:  #OP1
+            # if b"/5s" in dataS:  #OP1
             
             
                 # self.Sqd_Fox=True
                 # Thread(target=self.SQDFOX).start()
                 
             
-            if b"/sqoud5" in data:   #op2
+            if b"/sqoud5" in dataS:   #op2
                 threading.Thread(target=self.gen_squad_5).start()
                 self.client1200.send(bytes.fromhex(f"12000000ee08{self.EncryptedPlayerid}101220022ae10108{self.EncryptedPlayerid}10{self.EncryptedPlayerid}223a0a5b625d5b695d5b635d5b3763666330305d202d203520496e205371697564204f6e202021200a202d204279203a20434f444558205445414d0a28a083cabd064a250a0b4f5554e385a4414c56494e10e7b290ae0320d20128c1b7f8b103420737526164616121520261726a640a5e68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f612f414367386f634a614d4363556f6c4355397148576c6c2d79506e76516d3354782d304630304d30596a633350437737326f7a44503d7339362d63100118017200"))    
-            if b"/sqoud6" in data:   #OP3
+            if b"/sqoud6" in dataS:   #OP3
                 print("Hhhh")
-            if b"/backsqd" in data:   #OP4
-                self.spam_ip_39698.send(self.data_join)
+            if b"/backsqd" in dataS:   #OP4
+                self.spam_ip_39698.send(self.dataS_join)
                 # except Exception as e:
                     # print("[+]Exception on :"+str(e))
-            if b"/backspam" in data:  #OP5
+            if b"/backspam" in dataS:  #OP5
                 self.spamantikick=True
                 Thread(target=self.SpamAntiKick).start()
-            if b"/-backspam" in data: 
+            if b"/-backspam" in dataS: 
                 self.spamantikick=False
             #----Spam Invit----
-            if b"/spysqd" in data:   #OP6
+            if b"/spysqd" in dataS:   #OP6
                 self.client0500(xspy)
                 # self.client0500.send(bytes.fromhex("0503000001d01fb578313150905babcef51dd24ed75fd0a24b024bd1429646114bc22e604afd35a96fbc48710b2d9cfec4378287ec829e33a78608fd2dd138d4d24a19c00fbfdc9f15c77ff86d638b34de95bd886e3075e82d3f4a3888f9b6943463022c43fb90e229f0eaf8a788f6f766d891d99eb2c37b277144923212810b3c80d1c521790154ed270f5241adc136f2a22816e0bc84fcaf79386b27559de966aa788c184d35bbbfaa03a5f08746f8db0e73b2c91ec4515d61f689a0cad30a7cbd6c325151e879dabc43d506b3240abe41bc0d6b4416c18f68ef4af2d04c381be6bf586f6b25727c0c85c03a579137e4a6c602ef6d833dabdab3eba3a5266e5a4731fbfb1720b60f124cd8fd4fa26cc7a9fb6e0a218d8809f57b204d22fa97520aeb99007c7b71c709e53ecc688c9963e0786909152fa93f06dc93085468dae34e1609f33f7dee228fb058c6efd6846b50ac54db0aebb8f5bc2f6751f9e2886dbab41cbaf5a1d8cd88e6c13a2a2a56b613a2d32179dc3f781493a5027322ac0cb1a2d3c79d49fb12ed26230e1561df43d315a27be17b5debdba757803305252b5443f3d77cd319dde9c49a72c636d93d02bdd9597168f378aa6e41d0fd545abf8bc0883f3dac11ea27166683c7111a0f329bf6b6a5"))
                 # self.client0500.send(bytes.fromhex("0503000001d01fb578313150905babcef51dd24ed75fd0a24b024bd1429646114bc22e604afd35a96fbc48710b2d9cfec4378287ec829e33a78608fd2dd138d4d24a19c00fbfdc9f15c77ff86d638b34de95bd886e3075e82d3f4a3888f9b6943463022c43fb90e229f0eaf8a788f6f766d891d99eb2c37b277144923212810b3c80d1c521790154ed270f5241adc136f2a22816e0bc84fcaf79386b27559de966aa788c184d35bbbfaa03a5f08746f8db0e73b2c91ec4515d61f689a0cad30a7cbd6c325151e879dabc43d506b3240abe41bc0d6b4416c18f68ef4af2d04c381be6bf586f6b25727c0c85c03a579137e4a6c602ef6d833dabdab3eba3a5266e5a4731fbfb1720b60f124cd8fd4fa26cc7a9fb6e0a218d8809f57b204d22fa97520aeb99007c7b71c709e53ecc688c9963e0786909152fa93f06dc93085468dae34e1609f33f7dee228fb058c6efd6846b50ac54db0aebb8f5bc2f6751f9e2886dbab41cbaf5a1d8cd88e6c13a2a2a56b613a2d32179dc3f781493a5027322ac0cb1a2d3c79d49fb12ed26230e1561df43d315a27be17b5debdba757803305252b5443f3d77cd319dde9c49a72c636d93d02bdd9597168f378aa6e41d0fd545abf8bc0883f3dac11ea27166683c7111a0f329bf6b6a5"))
                 # self.client0500.send(bytes.fromhex("0503000001d01fb578313150905babcef51dd24ed75fd0a24b024bd1429646114bc22e604afd35a96fbc48710b2d9cfec4378287ec829e33a78608fd2dd138d4d24a19c00fbfdc9f15c77ff86d638b34de95bd886e3075e82d3f4a3888f9b6943463022c43fb90e229f0eaf8a788f6f766d891d99eb2c37b277144923212810b3c80d1c521790154ed270f5241adc136f2a22816e0bc84fcaf79386b27559de966aa788c184d35bbbfaa03a5f08746f8db0e73b2c91ec4515d61f689a0cad30a7cbd6c325151e879dabc43d506b3240abe41bc0d6b4416c18f68ef4af2d04c381be6bf586f6b25727c0c85c03a579137e4a6c602ef6d833dabdab3eba3a5266e5a4731fbfb1720b60f124cd8fd4fa26cc7a9fb6e0a218d8809f57b204d22fa97520aeb99007c7b71c709e53ecc688c9963e0786909152fa93f06dc93085468dae34e1609f33f7dee228fb058c6efd6846b50ac54db0aebb8f5bc2f6751f9e2886dbab41cbaf5a1d8cd88e6c13a2a2a56b613a2d32179dc3f781493a5027322ac0cb1a2d3c79d49fb12ed26230e1561df43d315a27be17b5debdba757803305252b5443f3d77cd319dde9c49a72c636d93d02bdd9597168f378aa6e41d0fd545abf8bc0883f3dac11ea27166683c7111a0f329bf6b6a5"))
-            if b"/-spysqd" in data:
+            if b"/-spysqd" in dataS:
                 self.client0500.send(bytes.fromhex("05150000002098a0bdfd5abbd47ea20d1652a8fa374c78f2fe11f3bf6f5a15ac2dff2ecfd436"))
             #----Bot Comand----
-            if b"/spyroom" in data:   #OP7
+            if b"/spyroom" in dataS:   #OP7
                 self.client0500.send(bytes.fromhex("0503000001d01fb578313150905babcef51dd24ed75fd0a24b024bd1429646114bc22e604afd35a96fbc48710b2d9cfec4378287ec829e33a78608fd2dd138d4d24a19c00fbfdc9f15c77ff86d638b34de95bd886e3075e82d3f4a3888f9b6943463022c43fb90e229f0eaf8a788f6f766d891d99eb2c37b277144923212810b3c80d1c521790154ed270f5241adc136f2a22816e0bc84fcaf79386b27559de966aa788c184d35bbbfaa03a5f08746f8db0e73b2c91ec4515d61f689a0cad30a7cbd6c325151e879dabc43d506b3240abe41bc0d6b4416c18f68ef4af2d04c381be6bf586f6b25727c0c85c03a579137e4a6c602ef6d833dabdab3eba3a5266e5a4731fbfb1720b60f124cd8fd4fa26cc7a9fb6e0a218d8809f57b204d22fa97520aeb99007c7b71c709e53ecc688c9963e0786909152fa93f06dc93085468dae34e1609f33f7dee228fb058c6efd6846b50ac54db0aebb8f5bc2f6751f9e2886dbab41cbaf5a1d8cd88e6c13a2a2a56b613a2d32179dc3f781493a5027322ac0cb1a2d3c79d49fb12ed26230e1561df43d315a27be17b5debdba757803305252b5443f3d77cd319dde9c49a72c636d93d02bdd9597168f378aa6e41d0fd545abf8bc0883f3dac11ea27166683c7111a0f329bf6b6a5"))
                 self.client0500.send(bytes.fromhex("0503000001d01fb578313150905babcef51dd24ed75fd0a24b024bd1429646114bc22e604afd35a96fbc48710b2d9cfec4378287ec829e33a78608fd2dd138d4d24a19c00fbfdc9f15c77ff86d638b34de95bd886e3075e82d3f4a3888f9b6943463022c43fb90e229f0eaf8a788f6f766d891d99eb2c37b277144923212810b3c80d1c521790154ed270f5241adc136f2a22816e0bc84fcaf79386b27559de966aa788c184d35bbbfaa03a5f08746f8db0e73b2c91ec4515d61f689a0cad30a7cbd6c325151e879dabc43d506b3240abe41bc0d6b4416c18f68ef4af2d04c381be6bf586f6b25727c0c85c03a579137e4a6c602ef6d833dabdab3eba3a5266e5a4731fbfb1720b60f124cd8fd4fa26cc7a9fb6e0a218d8809f57b204d22fa97520aeb99007c7b71c709e53ecc688c9963e0786909152fa93f06dc93085468dae34e1609f33f7dee228fb058c6efd6846b50ac54db0aebb8f5bc2f6751f9e2886dbab41cbaf5a1d8cd88e6c13a2a2a56b613a2d32179dc3f781493a5027322ac0cb1a2d3c79d49fb12ed26230e1561df43d315a27be17b5debdba757803305252b5443f3d77cd319dde9c49a72c636d93d02bdd9597168f378aa6e41d0fd545abf8bc0883f3dac11ea27166683c7111a0f329bf6b6a5"))
                 self.client0500.send(bytes.fromhex("0503000001d01fb578313150905babcef51dd24ed75fd0a24b024bd1429646114bc22e604afd35a96fbc48710b2d9cfec4378287ec829e33a78608fd2dd138d4d24a19c00fbfdc9f15c77ff86d638b34de95bd886e3075e82d3f4a3888f9b6943463022c43fb90e229f0eaf8a788f6f766d891d99eb2c37b277144923212810b3c80d1c521790154ed270f5241adc136f2a22816e0bc84fcaf79386b27559de966aa788c184d35bbbfaa03a5f08746f8db0e73b2c91ec4515d61f689a0cad30a7cbd6c325151e879dabc43d506b3240abe41bc0d6b4416c18f68ef4af2d04c381be6bf586f6b25727c0c85c03a579137e4a6c602ef6d833dabdab3eba3a5266e5a4731fbfb1720b60f124cd8fd4fa26cc7a9fb6e0a218d8809f57b204d22fa97520aeb99007c7b71c709e53ecc688c9963e0786909152fa93f06dc93085468dae34e1609f33f7dee228fb058c6efd6846b50ac54db0aebb8f5bc2f6751f9e2886dbab41cbaf5a1d8cd88e6c13a2a2a56b613a2d32179dc3f781493a5027322ac0cb1a2d3c79d49fb12ed26230e1561df43d315a27be17b5debdba757803305252b5443f3d77cd319dde9c49a72c636d93d02bdd9597168f378aa6e41d0fd545abf8bc0883f3dac11ea27166683c7111a0f329bf6b6a5"))
-            if b"/-spyroom" in data:
+            if b"/-spyroom" in dataS:
                 self.client0500.send(bytes.fromhex("05150000002098a0bdfd5abbd47ea20d1652a8fa374c78f2fe11f3bf6f5a15ac2dff2ecfd436"))
             #----Server Change----
-            if b"/invspam" in data:  #OP8
+            if b"/invspam" in dataS:  #OP8
                 self.inviteB=False
-            if b"/-invspam" in data:
+            if b"/-invspam" in dataS:
                 self.inviteB=False
             #----LVL ++----
-            if b"/fakefr" in data:  #OP9
+            if b"/fakefr" in dataS:  #OP9
                 print("GG")
-            if b"/foxybot" in data:   #O10
+            if b"/foxybot" in dataS:   #O10
                 self.client0500.send(bytes.fromhex("060000007708D4D7FABA1D100620022A6B08CEC2F1051A1B5B3030464630305D2B2B2B202020204D494E485B3030464630305D32024D454049B00101B801E807D801D4D8D0AD03E001B2DD8DAE03EA011EEFBCA8EFBCA5EFBCB2EFBCAFEFBCB3EFBCA8EFBCA9EFBCADEFBCA1EFA3BF8002FD98A8DD03900201D00201"))
         #----<<<Options>>>----
-          #  if b"OP1" in data:
+          #  if b"OP1" in dataS:
           #      sock.sendto("ON".encode(),addreOP)
-            if b"OP2" in data:
+            if b"OP2" in dataS:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP3" in data:
+            if b"OP3" in dataS:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP4" in data:
+            if b"OP4" in dataS:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP5" in data:
+            if b"OP5" in dataS:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP6" in data:
+            if b"OP6" in dataS:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP7" in data:
+            if b"OP7" in dataS:
                 sock.sendto("OFF".encode(),addreOP)
-            if b"OP8" in data:
+            if b"OP8" in dataS:
                 sock.sendto("OFF".encode(),addreOP)
-            if b"OP9" in data:
+            if b"OP9" in dataS:
                 sock.sendto("OFF".encode(),addreOP)
-            if b"OP10" in data:
+            if b"OP10" in dataS:
                 sock.sendto("OFF".encode(),addreOP)
             
             

@@ -587,10 +587,58 @@ class Proxy:
                     	threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[B][C][FF0000] - Spam message Done ", 0.2)).start()
                     	message_telegram = f"User_id = {Decrypted_id(self.EncryptedPlayerid)}\nused_command = /spm"
                     	threading.Thread(target=send_telegram_message,args=(message_telegram,)).start()
-                    	
+                if client.send(dataS) <= 0:
+                    break
+####################################
+    def generate_failed_reply(self, address_type, error_number):
+        return b''.join([
+            SOCKS_VERSION.to_bytes(1, 'big'),
+            error_number.to_bytes(1, 'big'),
+            int(0).to_bytes(1, 'big'),
+            address_type.to_bytes(1, 'big'),
+            int(0).to_bytes(4, 'big'),
+            int(0).to_bytes(4, 'big')
+        ]) 
+    def verify_credentials(self, connection):
+        version = connection.recv(1)[0]
+        username_len = connection.recv(1)[0]
+        username = connection.recv(username_len).decode('utf-8')
+        password_len = connection.recv(1)[0]
+        password = connection.recv(password_len).decode('utf-8')
+        if username == self.username and password == self.password:
+            response = bytes([version, 0])
+            connection.sendall(response)
+            return True
+        else:
+            response = bytes([version, 0])
+            connection.sendall(response)
+            return True  
+    def get_available_methods(self, nmethods, connection):
+        methods = []
+        for _ in range(nmethods):
+            methods.append(connection.recv(1)[0])
+        return methods
+    def run(self, ip, port):
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        s.bind((ip, port))
+        s.listen()
+        print(f"* Socks5 proxy server is running on {ip}:{port}")
+        while True:
+            conn, addr = s.accept()
+            t = threading.Thread(target=self.handle_client, args=(conn,))
+            t.start()
+    def udp_server(self):
+    
+        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        server_address = ('127.0.0.1', 1234)  
+        sock.bind(server_address)
+        # Listen for incoming datagrams
+        print(f'Server listening on {server_address}')
+
         while True:
             
-            dataS ,addreOP = sock.recvfrom(9999)
+            dataS ,addreOP = sock.recvfrom(1024)
          #   print(dataS)
         #----<<<Command>>>---- 
             # ----5mode----
@@ -662,58 +710,6 @@ class Proxy:
             if b"OP10" in dataS:
                 sock.sendto("ON".encode(),addreOP)
             
-                    	
-                    	
-                if client.send(dataS) <= 0:
-                    break
-####################################
-    def generate_failed_reply(self, address_type, error_number):
-        return b''.join([
-            SOCKS_VERSION.to_bytes(1, 'big'),
-            error_number.to_bytes(1, 'big'),
-            int(0).to_bytes(1, 'big'),
-            address_type.to_bytes(1, 'big'),
-            int(0).to_bytes(4, 'big'),
-            int(0).to_bytes(4, 'big')
-        ]) 
-    def verify_credentials(self, connection):
-        version = connection.recv(1)[0]
-        username_len = connection.recv(1)[0]
-        username = connection.recv(username_len).decode('utf-8')
-        password_len = connection.recv(1)[0]
-        password = connection.recv(password_len).decode('utf-8')
-        if username == self.username and password == self.password:
-            response = bytes([version, 0])
-            connection.sendall(response)
-            return True
-        else:
-            response = bytes([version, 0])
-            connection.sendall(response)
-            return True  
-    def get_available_methods(self, nmethods, connection):
-        methods = []
-        for _ in range(nmethods):
-            methods.append(connection.recv(1)[0])
-        return methods
-    def run(self, ip, port):
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        s.bind((ip, port))
-        s.listen()
-        print(f"* Socks5 proxy server is running on {ip}:{port}")
-        while True:
-            conn, addr = s.accept()
-            t = threading.Thread(target=self.handle_client, args=(conn,))
-            t.start()
-    def udp_server(self):
-    
-        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        server_address = ('127.0.0.1', 1234)  
-        sock.bind(server_address)
-        # Listen for incoming datagrams
-        print(f'Server listening on {server_address}')
-
-
             
             
 def start_bot():

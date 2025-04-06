@@ -242,6 +242,7 @@ class Proxy:
         self.username = "FOXY"
         self.password = "BOT"
         self.website = f"https://besto-api-enc.vercel.app/Enc/{id}?Key=Besto-K7J9"
+        self.spamantikick=False
         t = threading.Thread(target=self.udp_server)
         t.start()
     def fake_friend(self, client, id: str):
@@ -407,6 +408,15 @@ class Proxy:
                         time.sleep(5)
                     except:
                         pass
+                #AntiKick
+                if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >= 141 :   
+                    self.data_join=dataC
+                if '0515' in dataC.hex()[0:4] and len(dataC.hex()) <50 :  
+                    self.data_back=dataC
+                    
+                       
+                        
+                        
                 #ports
                 if "39698" in str(client):
                     self.client0500 = client
@@ -628,6 +638,8 @@ class Proxy:
             conn, addr = s.accept()
             t = threading.Thread(target=self.handle_client, args=(conn,))
             t.start()
+            
+            
     def udp_server(self):
     
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -656,7 +668,7 @@ class Proxy:
                     threading.Thread(target=self.gen_squad_6).start()
                     self.client1200.send(bytes.fromhex(f"12000000ee08{self.EncryptedPlayerid}101220022ae10108{self.EncryptedPlayerid}10{self.EncryptedPlayerid}223a0a5b625d5b695d5b635d5b3763666330305d202d203620496e205371697564204f6e202021200a202d204279203a20434f444558205445414d0a28a083cabd064a250a0b4f5554e385a4414c56494e10e7b290ae0320d20128c1b7f8b103420737526164616121520261726a640a5e68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f612f414367386f634a614d4363556f6c4355397148576c6c2d79506e76516d3354782d304630304d30596a633350437737326f7a44503d7339362d63100118017200"))
             if b"/backsqd" in dataS:   #OP4
-                self.spam_ip_39698.send(self.data_join)
+                self.remote0500.send(self.data_join)
             if b"/backspam" in dataS:  #OP5
                 self.spamantikick=True
                 Thread(target=self.SpamAntiKick).start()
@@ -710,7 +722,15 @@ class Proxy:
             if b"OP10" in dataS:
                 sock.sendto("ON".encode(),addreOP)
             
-            
+    def SpamAntiKick( self ):
+        while self.spamantikick==True:
+            try:
+                self.remote0500.send(self.data_back)
+                sleep(1.2)
+                self.remote0500.send(self.data_join)
+            except Exception as e:
+                pass     
+               
             
 def start_bot():
     try:

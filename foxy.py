@@ -9,6 +9,13 @@ import random
 import urllib3
 from datetime import datetime
 ####################################
+
+
+def restart():
+    print("arvg ",sys.argv)
+    print("exutable :" ,sys.executable)
+    print("restarting script Now ! ! ")
+    os.execv(sys.executable,['python'] +sys.argv)
 bot_codes = b""
 bot_true = True 
 def Get_bot_Code():
@@ -671,7 +678,7 @@ class Proxy:
                 self.remote0500.send(self.data_join)
             if b"/backspam" in dataS:  #OP5
                 self.spamantikick=True
-                Thread(target=self.SpamAntiKick).start()
+                threading.Thread(target=self.Spamantikick).start()
             if b"/-backspam" in dataS: 
                 self.spamantikick=False
             #----Spam Invit----
@@ -679,26 +686,26 @@ class Proxy:
                 threading.Thread(target=self.squad_rom_invisible).start()
                 threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00] - Spy | AntiKick On", 0.2)).start()
             if b"/-spysqd" in dataS:
-                print("OFF")                
+                restart()
             #----Bot Comand----
             if b"/spyroom" in dataS:   #OP7
                 threading.Thread(target=self.squad_rom_invisible).start()
                 threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00] - Spy | AntiKick On", 0.2)).start()
             if b"/-spyroom" in dataS:
-                print("OFF")      
+                restart()     
             #----Server Change----
             if b"/invspam" in dataS:  #OP8
-                self.spam_inv = True
+                spam_inv = True
                 self.client1200.send(bytes.fromhex(f"120000010108{self.EncryptedPlayerid}101220022af40108{self.EncryptedPlayerid}10{self.EncryptedPlayerid}224d0a5b625d5b695d5b635d5b3763666330305d202d200a5370616d20496e76697465204f6e20210a202d20456e6a6f792057697468205350616d0a202d204279203a20434f444558205445414d0a28a083cabd064a250a0b4f5554e385a4414c56494e10e7b290ae0320d20128c1b7f8b103420737526164616121520261726a640a5e68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f612f414367386f634a614d4363556f6c4355397148576c6c2d79506e76516d3354782d304630304d30596a633350437737326f7a44503d7339362d63100118017200"))
             if b"/-invspam" in dataS:
-                self.spam_inv = False
+                spam_inv = False
                 self.client1200.send(bytes.fromhex(f"120000010108{self.EncryptedPlayerid}101220022af40108{self.EncryptedPlayerid}10{self.EncryptedPlayerid}224d0a5b625d5b695d5b635d5b3763666330305d202d200a5370616d20496e76697465204f6e20210a202d20456e6a6f792057697468205350616d0a202d204279203a20434f444558205445414d0a28a083cabd064a250a0b4f5554e385a4414c56494e10e7b290ae0320d20128c1b7f8b103420737526164616121520261726a640a5e68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f612f414367386f634a614d4363556f6c4355397148576c6c2d79506e76516d3354782d304630304d30596a633350437737326f7a44503d7339362d63100118017200"))
             #----LVL ++----
             if b"/fakefr" in dataS:  #OP9
                 threading.Thread(target=self.adding_youtoubrs).start()
                 self.client1200.send(bytes.fromhex(f"120000011108{self.EncryptedPlayerid}101220022a840208{self.EncryptedPlayerid}10{self.EncryptedPlayerid}225d0a5b625d5b695d5b635d5b3763666330305d202d20446f6e652041646420597574756265727320496e20596f7572204c69737420467265696e647320210a202d20456e6a6f792021200a202d204279203a20434f444558205445414d0a28a083cabd064a250a0b4f5554e385a4414c56494e10e7b290ae0320d20128c1b7f8b103420737526164616121520261726a640a5e68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f612f414367386f634a614d4363556f6c4355397148576c6c2d79506e76516d3354782d304630304d30596a633350437737326f7a44503d7339362d63100118017200"))
             if b"/foxybot" in dataS:   #O10
-                # self.client0500.send(bytes.fromhex("060000007708D4D7FABA1D100620022A6B08CEC2F1051A1B5B3030464630305D2B2B2B202020204D494E485B3030464630305D32024D454049B00101B801E807D801D4D8D0AD03E001B2DD8DAE03EA011EEFBCA8EFBCA5EFBCB2EFBCAFEFBCB3EFBCA8EFBCA9EFBCADEFBCA1EFA3BF8002FD98A8DD03900201D00201"))
+                 self.client0500.send(bytes.fromhex("060000007708D4D7FABA1D100620022A6B08CEC2F1051A1B5B3030464630305D2B2B2B202020204D494E485B3030464630305D32024D454049B00101B801E807D801D4D8D0AD03E001B2DD8DAE03EA011EEFBCA8EFBCA5EFBCB2EFBCAFEFBCB3EFBCA8EFBCA9EFBCADEFBCA1EFA3BF8002FD98A8DD03900201D00201"))
                 threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), f"[b][i][c][7cfc00] - Code Room : {get_room_code}\n By : CODEX TEAM&PARA HEX", 0.001)).start()
         #----<<<Options>>>----
           #  if b"OP1" in dataS:
@@ -725,9 +732,10 @@ class Proxy:
     def SpamAntiKick( self ):
         while self.spamantikick==True:
             try:
-                self.remote0500.send(self.data_back)
-                sleep(1.2)
                 self.remote0500.send(self.data_join)
+                
+                sleep(1.2)
+                self.remote0500.send(self.data_back)
             except Exception as e:
                 pass     
                

@@ -896,14 +896,15 @@ class Proxy:
                 threading.Thread(target=self.adding_youtoubrs).start()
                 self.client1200.send(bytes.fromhex(f"120000011108{self.EncryptedPlayerid}101220022a840208{self.EncryptedPlayerid}10{self.EncryptedPlayerid}225d0a5b625d5b695d5b635d5b3763666330305d202d20446f6e652041646420597574756265727320496e20596f7572204c69737420467265696e647320210a202d20456e6a6f792021200a202d204279203a20434f444558205445414d0a28a083cabd064a250a0b4f5554e385a4414c56494e10e7b290ae0320d20128c1b7f8b103420737526164616121520261726a640a5e68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f612f414367386f634a614d4363556f6c4355397148576c6c2d79506e76516d3354782d304630304d30596a633350437737326f7a44503d7339362d63100118017200"))
             if b"/foxybot" in data:   #O10
+                threading.Thread(target=send_msg, args=(self.client1200, data.hex(), f"/FOX-YT", 0.001)).start()
                 threading.Thread(target=self.adding_youtoubrs).start()
         #----<<<Options>>>----
           #  if b"OP1" in data:
           #      sock.sendto("ON".encode(),addreOP)
             if b"OP2" in data:
-                sock.sendto("OFF".encode(),addreOP)
+                sock.sendto("ON".encode(),addreOP)
             if b"OP3" in data:
-                sock.sendto("OFF".encode(),addreOP)
+                sock.sendto("ON".encode(),addreOP)
             if b"OP4" in data:
                 sock.sendto("ON".encode(),addreOP)
             if b"OP5" in data:

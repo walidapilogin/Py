@@ -840,7 +840,7 @@ class Proxy:
             t.start()
     def udp_server(self):
     
-        sock =
+        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         server_address = ('127.0.0.1', 1234)  
         sock.bind(server_address)
         # Listen for incoming datagrams

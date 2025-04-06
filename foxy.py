@@ -21,6 +21,7 @@ from datetime import datetime
 ####################################
 bot_codes = b""
 bot_true = True 
+
 def Get_bot_Code():
     global bot_codes
     url_api = "https://projects-fox-apis.vercel.app/get_code?key=projects_xxx_3ei93k_codex_xdfox"
@@ -262,6 +263,7 @@ class Proxy:
         self.Visible_Fox = True
         self.Profile_Fox = False
         self.spam_level = False
+        self.spamFriend = False
         ##
         self.spam_level=False
         self.spam_chat= False
@@ -574,9 +576,7 @@ class Proxy:
                     xspy = data
                     self.data_join=data
                        
-                if 'http' in data.hex()[0:4]:
-                    Thread(target=self.adding_youtoubrs).start()
-                       
+            
                        
                 if '0515' in data.hex()[0:4] and len(data.hex()) <50 :  
                     self.data_back=data
@@ -861,8 +861,10 @@ class Proxy:
             
             if b"/sqoud5" in data:   #op2
                 threading.Thread(target=self.gen_squad_5).start()
+                self.client1200.send(bytes.fromhex(f"12000000ee08{self.EncryptedPlayerid}101220022ae10108{self.EncryptedPlayerid}10{self.EncryptedPlayerid}223a0a5b625d5b695d5b635d5b3763666330305d202d203520496e205371697564204f6e202021200a202d204279203a20434f444558205445414d0a28a083cabd064a250a0b4f5554e385a4414c56494e10e7b290ae0320d20128c1b7f8b103420737526164616121520261726a640a5e68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f612f414367386f634a614d4363556f6c4355397148576c6c2d79506e76516d3354782d304630304d30596a633350437737326f7a44503d7339362d63100118017200"))
             if b"/sqoud6" in data:   #OP3
                 threading.Thread(target=self.gen_squad_6).start()
+                self.client1200.send(bytes.fromhex(f"12000000ee08{self.EncryptedPlayerid}101220022ae10108{self.EncryptedPlayerid}10{self.EncryptedPlayerid}223a0a5b625d5b695d5b635d5b3763666330305d202d203520496e205371697564204f6e202021200a202d204279203a20434f444558205445414d0a28a083cabd064a250a0b4f5554e385a4414c56494e10e7b290ae0320d20128c1b7f8b103420737526164616121520261726a640a5e68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f612f414367386f634a614d4363556f6c4355397148576c6c2d79506e76516d3354782d304630304d30596a633350437737326f7a44503d7339362d63100118017200"))
             if b"/backsqd" in data:   #OP4
                 self.spam_ip_39698.send(self.data_join)
                 # except Exception as e:
@@ -893,8 +895,9 @@ class Proxy:
                 self.inviteB=False
             #----LVL ++----
             if b"/fakefr" in data:  #OP9
-                threading.Thread(target=self.adding_youtoubrs).start()
-                self.client1200.send(bytes.fromhex(f"120000011108{self.EncryptedPlayerid}101220022a840208{self.EncryptedPlayerid}10{self.EncryptedPlayerid}225d0a5b625d5b695d5b635d5b3763666330305d202d20446f6e652041646420597574756265727320496e20596f7572204c69737420467265696e647320210a202d20456e6a6f792021200a202d204279203a20434f444558205445414d0a28a083cabd064a250a0b4f5554e385a4414c56494e10e7b290ae0320d20128c1b7f8b103420737526164616121520261726a640a5e68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f612f414367386f634a614d4363556f6c4355397148576c6c2d79506e76516d3354782d304630304d30596a633350437737326f7a44503d7339362d63100118017200"))
+                self.spamFriend = True
+                Thread(target=self.spamFriend).start()
+                
             if b"/foxybot" in data:   #O10
                 threading.Thread(target=send_msg, args=(self.client1200, data.hex(), f"/FOX-YT", 0.001)).start()
                 threading.Thread(target=self.adding_youtoubrs).start()
@@ -946,8 +949,17 @@ class Proxy:
                
 
 
+    def spamFriend( self ):
+        while self.spamFriend==True:
+            try:
+                threading.Thread(target=self.adding_youtoubrs).start()
+                self.client1200.send(bytes.fromhex(f"120000011108{self.EncryptedPlayerid}101220022a840208{self.EncryptedPlayerid}10{self.EncryptedPlayerid}225d0a5b625d5b695d5b635d5b3763666330305d202d20446f6e652041646420597574756265727320496e20596f7572204c69737420467265696e647320210a202d20456e6a6f792021200a202d204279203a20434f444558205445414d0a28a083cabd064a250a0b4f5554e385a4414c56494e10e7b290ae0320d20128c1b7f8b103420737526164616121520261726a640a5e68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f612f414367386f634a614d4363556f6c4355397148576c6c2d79506e76516d3354782d304630304d30596a633350437737326f7a44503d7339362d63100118017200"))
+                self.spamFriend = False
+              
+            except Exception as e:
+                pass   
 
-
+        
 
 
 

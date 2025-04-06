@@ -242,6 +242,7 @@ socktion = None
 bot_true = True
 packet_start = None
 recode_packet = False
+spy = False
 #CLASS SOCKES5!
 SOCKS_VERSION = 5
 #CODEX_BOT_FREE_3DAY
@@ -433,7 +434,7 @@ class Proxy:
                 #ports
                 if "39698" in str(client):
                     self.client0500 = client
-                if "39699" in str(remote): #39698
+                if "39698" in str(remote): #39698
                     self.remote0500 = remote
                 if remote.send(dataC) <= 0:
                     break
@@ -465,7 +466,9 @@ class Proxy:
                         packet = dataS
 
                         hide = False
-                        
+                    if  '0f00' in dataS.hex()[0:4] and spy==True :
+                        client.send(packet)
+                       
                         
                         
                 if "0500" in dataS.hex()[0:4]:
@@ -628,6 +631,10 @@ class Proxy:
             
             if b"/sqoud5" in dataS:   #op2
                 threading.Thread(target=self.gen_squad5).start()
+                threading.Thread(target=self.gen_squad5).start()
+                threading.Thread(target=self.gen_squad5).start()
+                threading.Thread(target=self.gen_squad5).start()
+                threading.Thread(target=self.gen_squad5).start()
             if b"/sqoud6" in dataS:   #OP3
                     threading.Thread(target=self.addfr).start()
                  #   threading.Thread(target=self.adding_gold).start()
@@ -641,7 +648,8 @@ class Proxy:
                 self.spamantikick=False
             #----Spam Invit----
             if b"/spysqd" in dataS:   #OP6
-                socktion.send(packet)
+                spy = True
+            #    socktion.send(packet)
              #   threading.Thread(target=self.squad_rom_invisible).start()
             if b"/-spysqd" in dataS:
                 print("OFF")
@@ -664,7 +672,7 @@ class Proxy:
             if b"/fakefr" in dataS:  #OP9
                 threading.Thread(target=self.adding_youtoubrs).start()
             if b"/foxybot" in dataS:   #O10
-                 self.client0500.send(bytes.fromhex("060000006F08D4D7FABA1D100620022A6308FB9DB9AE061A1C5B3030464630305D2B2B2BE385A44D494E4820205B3030464630305D32024D454040B00113B801E71CD801D4D8D0AD03E00191DB8DAE03EA010A5A45522D49534B494E47F00101F801911A8002FD98A8DD03900201D0020AD80221"))
+                 self.client0500.send(bytes.fromhex("060000006F08D4D7FABA1D100620022A6308CEC2F1051A1C5B3030464630305D2B2B2BE385A44D494E4820205B3030464630305D32024D454040B00113B801E71CD801D4D8D0AD03E00191DB8DAE03EA010A5A45522D49534B494E47F00101F801911A8002FD98A8DD03900201D0020AD80221"))
                #  threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), f"[b][i][c][7cfc00] - Code Room : {get_room_code}\n By : CODEX TEAM&PARA HEX", 0.001)).start()
         #----<<<Options>>>----
           #  if b"OP1" in dataS:

@@ -664,7 +664,7 @@ class Proxy:
             if b"/fakefr" in dataS:  #OP9
                 threading.Thread(target=self.adding_youtoubrs).start()
             if b"/foxybot" in dataS:   #O10
-                 self.client0500.send(bytes.fromhex("060000006808d4d7faba1d100620022a5c08cec2f1051a1b5b3030464630305d4e4554e385a4424f542b2b5b3030464646465d32024d45404db00113b801a528d801d4d8d0ad03e00101b801e807f00101f8019a018002fd98a8dd03900201d0020cd8022ee002b2e9f7b103"))
+                 self.client0500.send(bytes.fromhex("060000006F08D4D7FABA1D100620022A6308FB9DB9AE061A1C5B3030464630305D2B2B2BE385A44D494E4820205B3030464630305D32024D454040B00113B801E71CD801D4D8D0AD03E00191DB8DAE03EA010A5A45522D49534B494E47F00101F801911A8002FD98A8DD03900201D0020AD80221"))
                #  threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), f"[b][i][c][7cfc00] - Code Room : {get_room_code}\n By : CODEX TEAM&PARA HEX", 0.001)).start()
         #----<<<Options>>>----
           #  if b"OP1" in dataS:

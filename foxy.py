@@ -238,6 +238,7 @@ fake_friend = False
 spam_room = False
 spam_inv = False
 get_room_code = None
+socktion = None
 bot_true = True
 packet_start = None
 recode_packet = False
@@ -421,17 +422,18 @@ class Proxy:
                         pass
                 #AntiKick
                 if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >= 141 :   
+                    hide = True
                     self.data_join=dataC
                 if '0515' in dataC.hex()[0:4] and len(dataC.hex()) <50 :  
                     self.data_back=dataC
                     
-                       
+
                         
                         
                 #ports
                 if "39698" in str(client):
                     self.client0500 = client
-                if "39698" in str(remote):
+                if "39699" in str(remote): #39698
                     self.remote0500 = remote
                 if remote.send(dataC) <= 0:
                     break
@@ -451,6 +453,21 @@ class Proxy:
                                     get_room_code = number
                     except:
                         pass
+                    
+                if  '0500' in dataS.hex()[0:4] and hide == True  :
+                    socktion =client
+
+
+                    if len(dataS.hex())<=30:
+
+                        hide =True
+                    if len(dataS.hex())>=31:
+                        packet = dataS
+
+                        hide = False
+                        
+                        
+                        
                 if "0500" in dataS.hex()[0:4]:
                     self.client0500 = client
                 #COMMANDS
@@ -624,9 +641,10 @@ class Proxy:
                 self.spamantikick=False
             #----Spam Invit----
             if b"/spysqd" in dataS:   #OP6
-                threading.Thread(target=self.squad_rom_invisible).start()
+                socktion.send(packet)
+             #   threading.Thread(target=self.squad_rom_invisible).start()
             if b"/-spysqd" in dataS:
-                restart()
+           #     restart()
             #----Bot Comand----
             if b"/spyroom" in dataS:   #OP7
                 recode_packet = True
@@ -681,7 +699,7 @@ class Proxy:
                
             
 def start_bot():
-    try:
+    try:.
             proxy = Proxy()
             t = threading.Thread(target=proxy.run, args=("127.0.0.1", 1999))
             t.start()

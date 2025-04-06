@@ -630,7 +630,7 @@ class Proxy:
             t.start()
     def udp_server(self):
     
-        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         server_address = ('127.0.0.1', 1234)  
         sock.bind(server_address)
         # Listen for incoming datagrams
@@ -638,7 +638,7 @@ class Proxy:
 
         while True:
             
-            dataS ,addreOP = sock.recvfrom(1024)
+            dataS ,addreOP = sock.recvfrom(4096)
             print(dataS)
         #----<<<Command>>>---- 
             # ----5mode----

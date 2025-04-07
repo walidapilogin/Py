@@ -684,7 +684,7 @@ class Proxy:
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][00FF00]/emotes --> Dance Player #3", 1.6)).start()
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b]/info+ <id> --> Player Info\n/region+ --> Player region", 1.8)).start()
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[EFF000][b]/add <id> --> add Friend", 2.0)).start()
-                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[FF0000][b]/add <id> --> add Friend\n We alway Here for you\n Thanks For Using Foxybot \n To use cmd --> /help \n Also w have some gifts for you thanks thanks..", 2.2)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[FF0000][b]/add <id> --> add Friend\n We alway Here for you\n Thanks For Using Foxybot \n To use cmd..", 2.2)).start()
                     
                     
                 if bot_true and  b'/EMT' in dataS:

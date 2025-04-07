@@ -474,12 +474,7 @@ class Proxy:
                         
                 if "0500" in dataS.hex()[0:4]:
                     self.client0500 = client
-                #COMMANDS
-                if bot_true and b"/record" in dataS:
-                    recode_packet = True
-                if bot_true and b"/start" in dataS:
-                    self.remote0500.send(bytes.fromhex(packet_start))
-                #APIS FEATURES!
+
                 if bot_true and b"/info+" in dataS:
                     parts = dataS.split(b"/info+")
                     player_id = parts[1].split(b"\x28")[0].decode("utf-8")
@@ -494,50 +489,63 @@ class Proxy:
                     b = get_player_info(player_id)
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), f"\n[b]Region : {b['Account Region']}\nName : {b['Name']}\n", 0.2)).start()
                 #ROOM FEATURES!
-                if bot_true and  b"/SPM-RM" in dataS:
+                if bot_true and  b"/room" in dataS:
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]ON Spam Room", 0.2)).start()
                     spam_room = True
-                if  bot_true and b"@SPM-RM" in dataS:
+                if  bot_true and b"/-room" in dataS:
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]OFF Spam Room", 0.2)).start()
                     spam_room = False
-                if bot_true and  b"/ROOM-CODE" in dataS:
+                if bot_true and  b"/getkey" in dataS:
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), f"[b][i][c][7cfc00] Code Room : {get_room_code}", 0.001)).start()
-                if bot_true and  b"ROM-SPY" in dataS:
+                if bot_true and  b"/spyroom" in dataS:
                     threading.Thread(target=self.squad_rom_invisible).start()
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]You Are Invisible", 0.2)).start()
-                if bot_true and  b"/invON" in dataS:
+                if bot_true and  b"/spam" in dataS:
                     spam_inv = True
-                if bot_true and  b"@invOFF" in dataS:
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]ON Spam Invitation", 0.2)).start()
+                if bot_true and  b"/-spam" in dataS:
                     spam_inv = False
-                if bot_true and  b"/SQUAD-SPY" in dataS:
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]OFF Spam Invitation", 0.2)).start()
+                if bot_true and  b"/spysqd" in dataS:
                     threading.Thread(target=self.squad_rom_invisible).start()
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]You are Invisible", 0.2)).start()
-                if bot_true and  b"/5s" in dataS:
+                if bot_true and  b"/d5" in dataS:
                     threading.Thread(target=self.gen_squad_5).start()
-                if bot_true and  b"/6s" in dataS:
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]Created 5 Sqoud", 0.2)).start()
+                if bot_true and  b"/d6" in dataS:
                     threading.Thread(target=self.gen_squad_6).start()
-                if bot_true and  b"/FOX-YT" in dataS:
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]Created 6 Sqoud", 0.2)).start()
+                if bot_true and  b"/yt" in dataS:
                     threading.Thread(target=self.adding_youtoubrs).start()
-                if bot_true and  b"/GD" in dataS:
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]New Friends Added", 0.2)).start()
+                if bot_true and  b"/gd" in dataS:
                     threading.Thread(target=self.adding_1mG_16kD).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]Gold and diamond Added", 0.2)).start()
            
-                if bot_true and  b"/GOLD" in dataS:
+                if bot_true and  b"/gold" in dataS:
                     threading.Thread(target=self.adding_gold).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]Gold Added", 0.2)).start()
 
-                if bot_true and  b"/DIAM" in dataS:
-                    threading.Thread(target=self.adding_daimond).start()
-                if bot_true and  '1200' in dataS.hex()[0:4] and b'/add' in dataS:           
-                        i = re.split('/add', str(dataS))[1]
-                        print(i)                        
-                        if '***' in i:
-                        	i = i.replace('***', '106')            	
-                        iddd = str(i).split('(\\x')[0]   	            
-                        id = self.Encrypt_ID(iddd)
-                        self.fake_friend(self.client0500, id)
-                        self.client1200.send(bytes.fromhex(f"12000000f708{self.EncryptedPlayerid}101220022aea0108{self.EncryptedPlayerid}10{self.EncryptedPlayerid}22430a5b625d5b695d5b635d5b3763666330305d202d20446f6e652041444420504c4159455220210a202d20456e6a6f790a202d204279203a20434f444558205445414d0a28a083cabd064a250a0b4f5554e385a4414c56494e10e7b290ae0320d20128c1b7f8b103420737526164616121520261726a640a5e68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f612f414367386f634a614d4363556f6c4355397148576c6c2d79506e76516d3354782d304630304d30596a633350437737326f7a44503d7339362d63100118017200"))
-              
-                #EMOTES FEATURS!
-                if bot_true and  b'@EMT' in dataS:
+                if bot_true and  b"/diam" in dataS:
+                    threading.Thread(target=self.adding_daimond).start() 
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]Diamond Added", 0.2)).start()
+                    
+                    
+                if bot_true and  b"/help" in dataS:
+                    threading.Thread(target=self.adding_gold).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]Welcome Foxybot v3\n   Commands :", 0.2)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b]/d5 --> 5 Sqoud\n/d6 --> 6 Sqoud", 0.2)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b]/spysqd --> Invisible Sqd\n/spyroom --> Invisible Room", 0.2)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][7cfc00]\spam --> Invitation Spam\n/room --> Spam Room", 0.2)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][FF0000]/getkey --> Room code\n /yt --> Add Friends yt", 0.2)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][00FFFF]/gd --> add all\n /gold --> add gold\n /diam --> add diamond", 0.2)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][FFF000]/EMT <id> --> Dance Player #1", 0.2)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][000FFF]/ds --> Dance Player #2", 0.2)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][00FF00]/emotes --> Dance Player #3", 0.2)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b]/info+ <id> --> Player Info\n/region+ --> Player region", 0.2)).start()
+                if bot_true and  b'/EMT' in dataS:
                     dataS_str = dataS.decode('utf-8', errors='ignore') 
-                    match = re.search(r'@EMT/(\d+)', dataS_str)
+                    match = re.search(r'/EMT/(\d+)', dataS_str)
                     emote_id = dataS.hex()[12:22]
                     if match:
                         value = int(match.group(1))
@@ -631,13 +639,11 @@ class Proxy:
                 
             
             if b"/sqoud5" in dataS:   #op2
-                threading.Thread(target=self.gen_squad5).start()
-                threading.Thread(target=self.gen_squad5).start()
-                threading.Thread(target=self.gen_squad5).start()
-                threading.Thread(target=self.gen_squad5).start()
-                threading.Thread(target=self.gen_squad5).start()
+            #    threading.Thread(target=self.gen_squad5).start()
+                threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "/d5", 0.2)).start()
+                
             if b"/sqoud6" in dataS:   #OP3
-                    threading.Thread(target=self.addfr).start()
+                    threading.Thread(target=self.gen_squad_5).start()
                  #   threading.Thread(target=self.adding_gold).start()
                  #   threading.Thread(target=self.adding_daimond).start()
             if b"/backsqd" in dataS:   #OP4

@@ -9,8 +9,61 @@ import random
 import urllib3
 from datetime import datetime
 ####################################
+def adjust_text_length(text, target_length=22, fill_char="00"):
+    # إذا كان النص أطول من العدد المستهدف من الأحرف
+    if len(text) > target_length:
+        return text[:target_length]
+    # إذا كان النص أقصر من العدد المستهدف من الأحرف
+    elif len(text) < target_length:
+        # نحتاج لإضافة "20" كملء للنص
+        fill_length = target_length - len(text)
+        # نجمع النص الأصلي مع النص المضاف
+        return text + (fill_char * (fill_length // len(fill_char)))[:fill_length]
+    # إذا كان النص بالفعل بطول العدد المستهدف من الأحرف
+    else:
+        return text
 
+def generate_random_color():
+	color_list = [
+    "[FFFFE0][b][c]", 
+    "[FFFFFF][b][c]", 
+    "[FF0000][b][c]", 
+    "[FFFF00][b][c]",
+    "[E0FFFF][b][c]", 
+    "[00FFFF][b][c]", 
+    "[FF00FF][b][c]", 
+    "[98FB98][b][c]",
+    "[90EE90][b][c]", 
+    "[00FF7F][b][c]", 
+    "[FFD700][b][c]", 
+    "[FFA500][b][c]",
+    "[FFC0CB][b][c]", 
+    "[FFB6C1][b][c]", 
+    "[F08080][b][c]", 
+    "[87CEFA][b][c]",
+    "[ADD8E6][b][c]", 
+    "[32CD32][b][c]", 
+    "[20B2AA][b][c]", 
+    "[BDB76B][b][c]",
+    "[9370DB][b][c]", 
+    "[00FF00][b][c]",
+    "[FFDD00][b][c]",
+    "[3813F3][b][c]",
+    "[FF0000][b][c]",
+    "[0000FF][b][c]",
+    "[FFA500][b][c]",
+    "[DF07F8][b][c]",
+    "[11EAFD][b][c]",
+    "[DCE775][b][c]",
+    "[A8E6CF][b][c]",
+    "[7CB342][b][c]",
+    "[FF0000][b][c]",
+    "[FFB300][b][c]",
+    "[90EE90][b][c]"
 
+]
+	random_color = random.choice(color_list)
+	return  random_color
 def restart():
     print("arvg ",sys.argv)
     print("exutable :" ,sys.executable)
@@ -243,6 +296,7 @@ bot_true = True
 packet_start = None
 recode_packet = False
 spy = False
+data_join=b''
 #CLASS SOCKES5!
 SOCKS_VERSION = 5
 #CODEX_BOT_FREE_3DAY
@@ -326,18 +380,89 @@ class Proxy:
          packet_invisible = "0503000001d01fb578313150905babcef51dd24ed75fd0a24b024bd1429646114bc22e604afd35a96fbc48710b2d9cfec4378287ec829e33a78608fd2dd138d4d24a19c00fbfdc9f15c77ff86d638b34de95bd886e3075e82d3f4a3888f9b6943463022c43fb90e229f0eaf8a788f6f766d891d99eb2c37b277144923212810b3c80d1c521790154ed270f5241adc136f2a22816e0bc84fcaf79386b27559de966aa788c184d35bbbfaa03a5f08746f8db0e73b2c91ec4515d61f689a0cad30a7cbd6c325151e879dabc43d506b3240abe41bc0d6b4416c18f68ef4af2d04c381be6bf586f6b25727c0c85c03a579137e4a6c602ef6d833dabdab3eba3a5266e5a4731fbfb1720b60f124cd8fd4fa26cc7a9fb6e0a218d8809f57b204d22fa97520aeb99007c7b71c709e53ecc688c9963e0786909152fa93f06dc93085468dae34e1609f33f7dee228fb058c6efd6846b50ac54db0aebb8f5bc2f6751f9e2886dbab41cbaf5a1d8cd88e6c13a2a2a56b613a2d32179dc3f781493a5027322ac0cb1a2d3c79d49fb12ed26230e1561df43d315a27be17b5debdba757803305252b5443f3d77cd319dde9c49a72c636d93d02bdd9597168f378aa6e41d0fd545abf8bc0883f3dac11ea27166683c7111a0f329bf6b6a5"
          self.client0500.send(bytes.fromhex(packet_invisible))
          
-    def addfr(self):
-        packet7 = f'060000006808d4d7faba1d100620022a5c08{self.EncryptedPlayerid}1a1b5b3030464630305d4e4554e385a4424f542b2b5b3030464646465d32024d45404db00113b801a528d801d4d8d0ad03e00101b801e807f00101f8019a018002fd98a8dd03900201d0020cd8022ee002b2e9f7b103"'
-        self.client0500.send(bytes.fromhex(packet7))
-         
     def gen_squad_6(self):
         packet_6 = f'050000032708{self.EncryptedPlayerid}100520082a9a0608dbdcd7cb251a910608{self.EncryptedPlayerid}12024d4518012005329d0508{self.EncryptedPlayerid}121ee28094cd9ecd9fcd9ee29885efbcb6efbca5efbcaeefbcafefbcade385a41a024d4520ebdd88b90628363087cbd1303832421880c38566949be061e1cea561b793e66080a89763e5bfce64480150d60158991468b7db8dae037a05ab93c5b00382011f08d1daf1eb0412054f75656973180420d487d4f0042a0808cc9d85f304100392010b0107090a0b12191a1e20229801db01a0014fc00101d001ada48aaf03e80101880203920208c205d628ae2db202aa02050801109c44aa0208080210ea3018c413aa0208080f10d836188827aa0205081710bd33aa0205082b10e432aa0205083910a070aa0205083d10c16faa02050849108439aa0205081810d836aa0205081a10d836aa0205081c10d836aa0205082010d836aa0205082210d836aa0205082110d836aa0205082310d836aa0205083110e432aa0205084110d836aa0205084d10e432aa0205081b10d836aa0205083410d836aa0205082810e432aa0205082910e432c202cd0112041a0201041a730848121301040506070203f1a802f4a802f2a802f3a8021a0b080110031886032086ac021a0b0802100418810420c59a081a0b0803100418da0620ecb4051a06080520f5ec021a0d08f1a802100318b80320def0041a0d08f2a802100318bc0520d0e90a1a0d08f3a802100318ef032092c9051a1208501201631a0b0863100e188f0420eeba0d1a1b0851120265661a09086520a6910128e7021a08086620822d289e05221f121d65ed0e890ed9049103f503ad02f90abd05e907a1068507cd08950ab109d802a6a38daf03ea020410011801f202080885cab5ee01105c8a0300920300980398e0b3af0ba20319efbca334e385a4eaa884e385a4efbcb4efbca5efbca1efbcada80368b00301c2030a081c100f180320052801e203014fea03003a011a403e50056801721e313733303239333438313635343436323834305f6c646a72387477723378880180909beaf3d18fd919a20100b001e201ea010449444331fa011e313733303239333438313635343436363239355f6f747735637831756c6d050000031e08{self.EncryptedPlayerid}1005203a2a910608{self.EncryptedPlayerid}12024d4518012005329d0508{self.EncryptedPlayerid}121ee28094cd9ecd9fcd9ee29885efbcb6efbca5efbcaeefbcafefbcade385a41a024d4520ebdd88b90628363087cbd1303832421880c38566949be061e1cea561b793e66080a89763e5bfce64480150d60158991468b7db8dae037a05ab93c5b00382011f08d1daf1eb0412054f75656973180420d487d4f0042a0808cc9d85f304100392010b0107090a0b12191a1e20229801db01a0014fc00101d001ada48aaf03e80101880203920208c205d628ae2db202aa02050801109c44aa0208080210ea3018c413aa0208080f10d836188827aa0205081710bd33aa0205082b10e432aa0205083910a070aa0205083d10c16faa02050849108439aa0205081810d836aa0205081a10d836aa0205081c10d836aa0205082010d836aa0205082210d836aa0205082110d836aa0205082310d836aa0205083110e432aa0205084110d836aa0205084d10e432aa0205081b10d836aa0205083410d836aa0205082810e432aa0205082910e432c202cd0112041a0201041a730848121301040506070203f1a802f4a802f2a802f3a8021a0b080110031886032086ac021a0b0802100418810420c59a081a0b0803100418da0620ecb4051a06080520f5ec021a0d08f1a802100318b80320def0041a0d08f2a802100318bc0520d0e90a1a0d08f3a802100318ef032092c9051a1208501201631a0b0863100e188f0420eeba0d1a1b0851120265661a09086520a6910128e7021a08086620822d289e05221f121d65ed0e890ed9049103f503ad02f90abd05e907a1068507cd08950ab109d802a6a38daf03ea020410011801f202080885cab5ee01105c8a0300920300980398e0b3af0ba20319efbca334e385a4eaa884e385a4efbcb4efbca5efbca1efbcada80368b00301c2030a081c100f180320052801e203014fea03003a011a403e50056801721e313733303239333438313635343436323834305f6c646a72387477723378880180909beaf3d18fd919a20100b001e201ea010449444331fa011e313733303239333438313635343436363239355f6f747735637831756c6d'
         self.client0500.send(bytes.fromhex(packet_6))
         
     def gen_squad5(self):
-         packet5 = f"05000001ff08{self.EncryptedPlayerid}1005203a2af20308{self.EncryptedPlayerid}12024d451801200432f70208{self.EncryptedPlayerid}1209424c52585f4d6f642b1a024d4520d78aa5b40628023085cbd1303832421880c38566fa96e660c19de061d998a36180a89763aab9ce64480150c90158e80792010801090a12191a1e209801c901c00101e801018802039202029603aa0208080110e43218807daa0207080f10e4322001aa0205080210e432aa0205081810e432aa0205081a10e432aa0205081c10e432aa0205082010e432aa0205082210e432aa0205082110e432aa0205081710e432aa0205082310e432aa0205082b10e432aa0205083110e432aa0205083910e432aa0205083d10e432aa0205084110e432aa0205084910e432aa0205084d10e432aa0205081b10e432aa0205083410e432aa0205082810e432aa0205082910e432c2022812041a0201041a0508501201631a060851120265661a0f0848120b0104050607f1a802f4a8022200ea0204100118018a03009203009803b7919db30ba20319c2b27854e19687e197a95fe191ade192aae197a95945e19687e20301523a011a403e50056801721e313732303237323231313638373535353930315f736f3278687a61366e347801820103303b30880180e0aecdacceba8e19a20100b00114ea010449444332fa011e313732303237323231313638373535383330335f71356f79736b3934716d"
-         self.client0500.send(bytes.fromhex(packet5))
+         data = bytes.fromhex(f"05000001ff08{self.EncryptedPlayerid}1005203a2af20308{self.EncryptedPlayerid}12024d451801200432f70208{self.EncryptedPlayerid}1209424c52585f4d6f642b1a024d4520d78aa5b40628023085cbd1303832421880c38566fa96e660c19de061d998a36180a89763aab9ce64480150c90158e80792010801090a12191a1e209801c901c00101e801018802039202029603aa0208080110e43218807daa0207080f10e4322001aa0205080210e432aa0205081810e432aa0205081a10e432aa0205081c10e432aa0205082010e432aa0205082210e432aa0205082110e432aa0205081710e432aa0205082310e432aa0205082b10e432aa0205083110e432aa0205083910e432aa0205083d10e432aa0205084110e432aa0205084910e432aa0205084d10e432aa0205081b10e432aa0205083410e432aa0205082810e432aa0205082910e432c2022812041a0201041a0508501201631a060851120265661a0f0848120b0104050607f1a802f4a8022200ea0204100118018a03009203009803b7919db30ba20319c2b27854e19687e197a95fe191ade192aae197a95945e19687e20301523a011a403e50056801721e313732303237323231313638373535353930315f736f3278687a61366e347801820103303b30880180e0aecdacceba8e19a20100b00114ea010449444332fa011e313732303237323231313638373535383330335f71356f79736b3934716d")
+         self.client0500.send(data)
+                          
+    def fake_friend(self, client, id: str):
+    #If player Offline send
+        if len(id) == 8:
+            packet = "060000007708d4d7faba1d100620022a6b08cec2f1051a1b5b6666303030305d4e4554332b202020424f545b6666303030305d32024d454049b00101b801e807d801d4d8d0ad03e00101b801e807ea011eefbca8efbca5efbcb2efbcafefbcb3efbca8efbca9efbcadefbca1efa3bf8002fd98a8dd03900201d00201"
+            packet = re.sub(r'cec2f105', id, packet)
+            client.send(bytes.fromhex(packet))
+    # Else if player online send
+        elif len(id) == 10:            
+            packet = "060000006f08d4d7faba1d100620022a6308fb9db9ae061a1c5b3030464630305d2b2be385a4434f44455820205b3030464630305d32024d454040b00113b801e71cd801d4d8d0ad03e00191db8dae03ea010a5a45522d49534b494e47f00101f801911a8002fd98a8dd03900201d0020ad80221"
+            packet = re.sub(r'fb9db9ae06', id, packet)
+            client.send(bytes.fromhex(packet))
+        else:
+            print(id)
+            print(packet)
+
+
+            
+
+            
+            
+
+     
+         
+         
+    def try_id(self, client, id: str):
+    #If player Offline send
+        if len(id) == 8:
+            # packet = "060000007708d4d7faba1d100620022a6b08cec2f1051a1b5b6666303030305d4e4554332b202020424f545b6666303030305d32024d454049b00101b801e807d801d4d8d0ad03e00101b801e807ea011eefbca8efbca5efbcb2efbcafefbcb3efbca8efbca9efbcadefbca1efa3bf8002fd98a8dd03900201d00201"
+            # packet = re.sub(r'cec2f105', id, packet)
+            # client.send(bytes.fromhex(packet))
+            print("################### ###########")
+            print("Player Offline")
+    
+
+    # Else if player online send
+        elif len(id) == 10:            
+            packet = "060000006f08d4d7faba1d100620022a6308fb9db9ae061a1c5b3030464630305d2b2be385a4434f44455820205b3030464630305d32024d454040b00113b801e71cd801d4d8d0ad03e00191db8dae03ea010a5a45522d49534b494e47f00101f801911a8002fd98a8dd03900201d0020ad80221"
+            
+            
+
         
+            id_add = id
+            data = bytes.fromhex(f"05000003ff08{self.EncryptedPlayerid}100520062af20708{id_add}12024d451801200332cc0408{id_add}12135b6564303930395d50454741e2808f535553201a024d4520a6e38baa0628443087cbd13038324218e0f38766e796a3618994e660f39ae061e5b7d064bfb8ce64480150ce01588e0c60f5d7d0ad0368c2dc8dae037a05d7d0cab00382012b08b3daf1eb041211d8b2d98ad988d98ad986d983d983e29cbf180620b687d4f0042a0808c49d85f30410038801ed89c5b00392010b0107090a0b1216191a20239801cd01a00111a80185fff5b103c00101c80101d001bace89af03e80101880203920207c20500a606e532aa020a080110c03e18f0602002aa0205080210b232aa0205080310e432aa020a080f10918a0118a09c01aa0205081710e750aa0205081810b768aa0205081a10da74aa0206081b10918a01aa0206081c10958c01aa02050820108b79aa0205082110eb7aaa0205082210a275aa0206082310dc8701aa0205082b10f476aa0205083110f476aa0206083910918a01aa0206083d10918a01aa0206084110918a01aa0205084910e432aa0205084d10e432aa0206083410918a01aa0205082810e432aa0205082910e432c2022112041a0201041a090848120501040506071a0508501201631a0508511201652200ea02520a4c68747470733a2f2f67726170682e66616365626f6f6b2e636f6d2f76392e302f3237373631373532363237343633352f706963747572653f77696474683d313630266865696768743d31363010011801f202090887cab5ee0110870a8a030808021003180528019203009803f3e78ea30ba20315e298afd986d8a7d8acd988d986d98ae298afe29c9432d00208{self.EncryptedPlayerid}120b1a024d452096ed8baa0628043089cbd13038324214fa96e660b599a361c19de061aab9ce64abb9ce64480150c90158e80792010601090a1219209801c901c00101c80101e80101880204920206ee07ce010000aa0208080110ff34188064aa020b080f10fd3218b086012001aa0205080210e432aa0205081810fd32aa0205081a10fd32aa0205081c10fd32aa0205082010fd32aa0205082210fd32aa0205082110fd32aa0205081710e432aa0205082310fd32aa0205082b10fd32aa0205083110fd32aa0205083910fd32aa0205083d10fd32aa0205084110fd32aa0205084910d836aa0205084d10e432aa0205081b10fd32aa0205083410fd32aa0205082810e432aa0205082910e432c2022112041a0201041a090848120501040506071a0508501201631a0508511201652200ea0204100118018a03009203003a0101400150016801721e313639383838363035353130343733333939355f6a67386c37333431646688018090aefec3978fef17a20100b001e001ea010449444331") 
+          #  data2 = bytes.fromhex(f"120000013808{self.EncryptedPlayerid}101220022aab0208{id_add}10{self.EncryptedPlayerid}18022889e7aba8063803428c017b22636f6e74656e74223a22545f32365f415f504f5f4d45535f31222c22697352657175657374223a747275652c2269734163636570746564223a66616c73652c22726561736f6e223a302c2274696d65223a302c2267616d65537461727454696d65223a302c226d617463684d6f6465223a302c2267616d654d6f6465223a302c226d61704944223a307d4a2c0a15d981d8b1d8b5d9875fd8b3d8b9d98ad8afd9873a2910b6c58fae0318bea9d2ad0320d90128d9aff8b1035202656e6a520a4c68747470733a2f2f67726170682e66616365626f6f6b2e636f6d2f76392e302f3731363937353732323035333131382f706963747572653f77696474683d313630266865696768743d31363010011801")
+         #   data = re.sub(r'fb9db9ae06', id, data)
+            
+         
+            packet = re.sub(r'fb9db9ae06', id, packet)
+            print(packet)
+            print("##########PACKET FRIEND###########")
+            client.send(bytes.fromhex(packet))
+         
+         
+            self.client0500.send(data)
+            
+            print("##########YOUR UID###########")
+            print(self.EncryptedPlayerid)
+            print("##########TARGET UID###########")
+            print(id)
+            print("##########DATA #1###########")
+            print(data)
+            print("Sucessfully ")
+            print("##########DATA #1###########")
+       #    self.client0500.send(data2)
+      #      print(data2)
+            print("Sucessfully ")
+            
+
+              
+            
+            
+        else:
+            print(id)
+            print("Bad error \n Last Else")
+
     def gen_squad_5(self):
          packet_5 = f"05000001ff08{self.EncryptedPlayerid}1005203a2af20308{self.EncryptedPlayerid}12024d451801200432f70208{self.EncryptedPlayerid}1209424c52585f4d6f642b1a024d4520d78aa5b40628023085cbd1303832421880c38566fa96e660c19de061d998a36180a89763aab9ce64480150c90158e80792010801090a12191a1e209801c901c00101e801018802039202029603aa0208080110e43218807daa0207080f10e4322001aa0205080210e432aa0205081810e432aa0205081a10e432aa0205081c10e432aa0205082010e432aa0205082210e432aa0205082110e432aa0205081710e432aa0205082310e432aa0205082b10e432aa0205083110e432aa0205083910e432aa0205083d10e432aa0205084110e432aa0205084910e432aa0205084d10e432aa0205081b10e432aa0205083410e432aa0205082810e432aa0205082910e432c2022812041a0201041a0508501201631a060851120265661a0f0848120b0104050607f1a802f4a8022200ea0204100118018a03009203009803b7919db30ba20319c2b27854e19687e197a95fe191ade192aae197a95945e19687e20301523a011a403e50056801721e313732303237323231313638373535353930315f736f3278687a61366e347801820103303b30880180e0aecdacceba8e19a20100b00114ea010449444332fa011e313732303237323231313638373535383330335f71356f79736b3934716d"
          self.client0500.send(bytes.fromhex(packet_5))
@@ -419,6 +544,7 @@ class Proxy:
                                     time.sleep(0.005)
                             time.sleep(0.03)
                         time.sleep(5)
+                        print(dataC)
                     except:
                         pass
                 #AntiKick
@@ -428,7 +554,6 @@ class Proxy:
                 if '0515' in dataC.hex()[0:4] and len(dataC.hex()) <50 :  
                     self.data_back=dataC
                     
-
                         
                         
                 #ports
@@ -455,9 +580,6 @@ class Proxy:
                     except:
                         pass
                     
-                if  '0500' in dataS.hex()[0:4] and hide == True  :
-                    socktion =client
-                    
 
 
                     if len(dataS.hex())<=30:
@@ -467,9 +589,7 @@ class Proxy:
                         packet = dataS
 
                         hide = False
-                    if  '0f00' in dataS.hex()[0:4] and spy==True :
-                        client.send(packet)
-                       
+
                         
                         
                 if "0500" in dataS.hex()[0:4]:
@@ -510,7 +630,8 @@ class Proxy:
                     threading.Thread(target=self.squad_rom_invisible).start()
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]You are Invisible", 0.2)).start()
                 if bot_true and  b"/d5" in dataS:
-                    threading.Thread(target=self.gen_squad_5).start()
+                    threading.Thread(target=self.gen_squad5).start()
+               #     threading.Thread(target=self.gen_squad_5).start()
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]Created 5 Sqoud", 0.2)).start()
                 if bot_true and  b"/d6" in dataS:
                     threading.Thread(target=self.gen_squad_6).start()
@@ -530,19 +651,42 @@ class Proxy:
                     threading.Thread(target=self.adding_daimond).start() 
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]Diamond Added", 0.2)).start()
                     
+                if bot_true and  '1200' in dataS.hex()[0:4] and b'/add' in dataS:           
+                    i = re.split('/add', str(dataS))[1]
+                    print(i)                        
+                    if '***' in i:
+                    	i = i.replace('***', '106')            	
+                    iddd = str(i).split('(\\x')[0]   	            
+                    id = self.Encrypt_ID(iddd)
+                    self.fake_friend(self.client0500, id)
+                    
+                if bot_true and  '1200' in dataS.hex()[0:4] and b'/join' in dataS:           
+                    i = re.split('/join', str(dataS))[1]
+                    print(i)                        
+                    if '***' in i:
+                    	i = i.replace('***', '106')            	
+                    iddd = str(i).split('(\\x')[0]   	            
+                    id = self.Encrypt_ID(iddd)
+                    self.try_id(self.client0500, id)
+                    
+                    
+                    
                     
                 if bot_true and  b"/help" in dataS:
-                    threading.Thread(target=self.adding_gold).start()
-                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]Welcome Foxybot v3\n   Commands :", 0.2)).start()
-                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b]/d5 --> 5 Sqoud\n/d6 --> 6 Sqoud", 0.2)).start()
-                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b]/spysqd --> Invisible Sqd\n/spyroom --> Invisible Room", 0.2)).start()
-                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][7cfc00]\spam --> Invitation Spam\n/room --> Spam Room", 0.2)).start()
-                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][FF0000]/getkey --> Room code\n /yt --> Add Friends yt", 0.2)).start()
-                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][00FFFF]/gd --> add all\n /gold --> add gold\n /diam --> add diamond", 0.2)).start()
-                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][FFF000]/EMT <id> --> Dance Player #1", 0.2)).start()
-                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][000FFF]/ds --> Dance Player #2", 0.2)).start()
-                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][00FF00]/emotes --> Dance Player #3", 0.2)).start()
-                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b]/info+ <id> --> Player Info\n/region+ --> Player region", 0.2)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]Welcome Foxybot v3\n   Commands :", 0.1)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b]/d5 --> 5 Sqoud\n/d6 --> 6 Sqoud", 0.3)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b]/spysqd --> Invisible Sqd\n/spyroom --> Invisible Room", 0.5)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][7cfc00]\spam --> Invitation Spam\n/room --> Spam Room", 0.7)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][FF0000]/getkey --> Room code\n /yt --> Add Friends yt", 0.9)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][00FFFF]/gd --> add all\n /gold --> add gold\n /diam --> add diamond", 1.0)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][FFF000]/EMT <id> --> Dance Player #1", 1.2)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][000FFF]/ds --> Dance Player #2", 1.4)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][00FF00]/emotes --> Dance Player #3", 1.6)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b]/info+ <id> --> Player Info\n/region+ --> Player region", 1.8)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[EFF000][b]/add <id> --> add Friend", 2.0)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[FF0000][b]/add <id> --> add Friend\n We alway Here for you\n Thanks For Using Foxybot \n To use cmd --> /help \n Also w have some gifts for you thanks thanks..", 2.2)).start()
+                    
+                    
                 if bot_true and  b'/EMT' in dataS:
                     dataS_str = dataS.decode('utf-8', errors='ignore') 
                     match = re.search(r'/EMT/(\d+)', dataS_str)
@@ -640,10 +784,10 @@ class Proxy:
             
             if b"/sqoud5" in dataS:   #op2
             #    threading.Thread(target=self.gen_squad5).start()
-                threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "/d5", 0.2)).start()
+                threading.Thread(target=self.gen_squad5).start()
                 
             if b"/sqoud6" in dataS:   #OP3
-                    threading.Thread(target=self.gen_squad_5).start()
+                threading.Thread(target=self.gen_squad5).start()
                  #   threading.Thread(target=self.adding_gold).start()
                  #   threading.Thread(target=self.adding_daimond).start()
             if b"/backsqd" in dataS:   #OP4
@@ -679,7 +823,7 @@ class Proxy:
             if b"/fakefr" in dataS:  #OP9
                 threading.Thread(target=self.adding_youtoubrs).start()
             if b"/foxybot" in dataS:   #O10
-                 self.client0500.send(bytes.fromhex("060000006f08d4d7faba1d100620022a6308fb9db9ae061a1c5b3030464630305d2b2be385a4434f44455820205b3030464630305d32024d454040b00113b801e71cd801d4d8d0ad03e00191db8dae03ea010a5a45522d49534b494e47f00101f801911a8002fd98a8dd03900201d0020ad80221"))
+                 self.client0500.send(bytes.fromhex("060000006f08d4d7faba1d100620022a6308cfc590f12a1a1c5b3030464630305d2b2be385a4434f44455820205b3030464630305d32024d454040b00113b801e71cd801d4d8d0ad03e00191db8dae03ea010a5a45522d49534b494e47f00101f801911a8002fd98a8dd03900201d0020ad80221"))
                #  threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), f"[b][i][c][7cfc00] - Code Room : {get_room_code}\n By : CODEX TEAM&PARA HEX", 0.001)).start()
         #----<<<Options>>>----
           #  if b"OP1" in dataS:

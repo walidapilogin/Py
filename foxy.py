@@ -296,6 +296,7 @@ bot_true = True
 packet_start = None
 recode_packet = False
 spy = False
+hide = False
 data_join=b''
 #CLASS SOCKES5!
 SOCKS_VERSION = 5
@@ -585,14 +586,20 @@ class Proxy:
                     
 
 
-                    if len(dataS.hex())<=30:
-
-                        hide =True
-                    if len(dataS.hex())>=31:
-                        packet = dataS
-
-                        hide = False
-
+                if  '0500' in dataS.hex()[0:4] and hide == True :
+                    
+                    
+                        if len(dataS.hex())<=30:
+                            
+                            hide =True
+                        if len(dataS.hex())>=31:
+                            packet = dataS
+                          #  print(packet)
+                            
+                            hide = False
+                if  '0f00' in dataS.hex()[0:4] and spy==True :
+                    client.send(packet)
+                        
                         
                         
                 if "0500" in dataS.hex()[0:4]:
@@ -787,7 +794,7 @@ class Proxy:
             
             if b"/sqoud5" in dataS:   #op2
             #    threading.Thread(target=self.gen_squad5).start()
-                  threading.Thread(target=self.gen_squadpro).start()
+                threading.Thread(target=self.gen_squadpro).start()
                 
             if b"/sqoud6" in dataS:   #OP3
                 threading.Thread(target=self.gen_squad5).start()
@@ -802,11 +809,11 @@ class Proxy:
                 self.spamantikick=False
             #----Spam Invit----
             if b"/spysqd" in dataS:   #OP6
-                spy = True
+                client.send(packet)
             #    socktion.send(packet)
-             #   threading.Thread(target=self.squad_rom_invisible).start()
+                threading.Thread(target=self.squad_rom_invisible).start()
             if b"/-spysqd" in dataS:
-                print("OFF")
+                spy = False
            #     restart()
             #----Bot Comand----
             if b"/spyroom" in dataS:   #OP7
@@ -854,9 +861,6 @@ class Proxy:
         while self.spamantikick==True:
             try:
                 self.remote0500.send(self.data_join)
-                
-                sleep(1.2)
-                self.remote0500.send(self.data_back)
             except Exception as e:
                 pass     
                

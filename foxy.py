@@ -593,12 +593,12 @@ class Proxy:
                             
                             hide =True
                         if len(dataS.hex())>=31:
-                            packet = dataS
+                            spypack = dataS
                           #  print(packet)
                             
                             hide = False
                 if  '0f00' in dataS.hex()[0:4] and spy==True :
-                    client.send(packet)
+                    client.send(spypack)
                         
                         
                         
@@ -809,7 +809,7 @@ class Proxy:
                 self.spamantikick=False
             #----Spam Invit----
             if b"/spysqd" in dataS:   #OP6
-                client.send(packet)
+                client.send(spypack)
             #    socktion.send(packet)
                 threading.Thread(target=self.squad_rom_invisible).start()
             if b"/-spysqd" in dataS:

@@ -803,8 +803,7 @@ class Proxy:
             if b"/backsqd" in dataS:   #OP4
                 self.remote0500.send(self.data_join)
             if b"/backspam" in dataS:  #OP5
-                self.spamantikick=True
-                threading.Thread(target=self.Spamantikick).start()
+                self.remote0500.send(self.data_back)
             if b"/-backspam" in dataS: 
                 self.spamantikick=False
             #----Spam Invit----

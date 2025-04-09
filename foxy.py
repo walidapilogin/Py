@@ -833,9 +833,9 @@ class Proxy:
             if b"OP3" in dataS:
                 sock.sendto("OFF".encode(),addreOP)
             if b"OP4" in dataS:
-                sock.sendto("OFF".encode(),addreOP)
+                sock.sendto("ON".encode(),addreOP)
             if b"OP5" in dataS:
-                sock.sendto("OFF".encode(),addreOP)
+                sock.sendto("ON".encode(),addreOP)
             if b"OP6" in dataS:
                 sock.sendto("OFF".encode(),addreOP)
             if b"OP7" in dataS:

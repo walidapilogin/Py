@@ -288,7 +288,7 @@ def adjust_text_length(text, target_length=22, fill_char="20"):
         return text
 ####################################
 
-Premium = True
+Premium = False
 Free = False
 
 fake_friend = False
@@ -795,7 +795,7 @@ class Proxy:
                          
             if b"/backspam" in dataS:  #OP3
                 self.spamantikick = True
-                Thread(target=self.adding_youtoubrs).start()
+                Thread(target=self.SpamAntiKick).start()
           
               
             if b"/-backspam" in dataS: #OP3

@@ -820,22 +820,34 @@ class Proxy:
                  self.client0500.send(bytes.fromhex("060000006f08d4d7faba1d100620022a6308cfc590f12a1a1c5b3030464630305d2b2be385a4434f44455820205b3030464630305d32024d454040b00113b801e71cd801d4d8d0ad03e00191db8dae03ea010a5a45522d49534b494e47f00101f801911a8002fd98a8dd03900201d0020ad80221"))
             if b"/-foxybot" in dataS:   #OP7
                  print("OFF")
+                 
+                 
             if b"/addgold" in dataS:   #OP8
                  Thread(target=self.adding_1mG_16kD).start()
             if b"/-addgold" in dataS:   #OP8
                  Thread(target=self.adding_gold).start()
+                 
+                 
             if b"/activ2" in dataS:   #OP9
                  print("OFFLINE")
             if b"/-activ2" in dataS:   #OP9
                  print("OFFLINE")
+                 
+                 
+            if b"/activ3" in dataS:   #OP9
+                 print("OFFLINE")
+            if b"/-activ3" in dataS:   #OP9
+                 print("OFFLINE")
+                 
+                 
             if b"OP2" in dataS:
                 sock.sendto("OFF".encode(),addreOP)
             if b"OP3" in dataS:
                 sock.sendto("OFF".encode(),addreOP)
             if b"OP4" in dataS:
-                sock.sendto("ON".encode(),addreOP)
+                sock.sendto("OFF".encode(),addreOP)
             if b"OP5" in dataS:
-                sock.sendto("ON".encode(),addreOP)
+                sock.sendto("OFF".encode(),addreOP)
             if b"OP6" in dataS:
                 sock.sendto("OFF".encode(),addreOP)
             if b"OP7" in dataS:

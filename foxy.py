@@ -434,7 +434,7 @@ class Proxy:
 
         
             id_add = id
-            data = bytes.fromhex(f"05000003ff08{self.EncryptedPlayerid}100520062af20708{id_add}12024d451801200332cc0408{id_add}12135b6564303930395d50454741e2808f535553201a024d4520a6e38baa0628443087cbd13038324218e0f38766e796a3618994e660f39ae061e5b7d064bfb8ce64480150ce01588e0c60f5d7d0ad0368c2dc8dae037a05d7d0cab00382012b08b3daf1eb041211d8b2d98ad988d98ad986d983d983e29cbf180620b687d4f0042a0808c49d85f30410038801ed89c5b00392010b0107090a0b1216191a20239801cd01a00111a80185fff5b103c00101c80101d001bace89af03e80101880203920207c20500a606e532aa020a080110c03e18f0602002aa0205080210b232aa0205080310e432aa020a080f10918a0118a09c01aa0205081710e750aa0205081810b768aa0205081a10da74aa0206081b10918a01aa0206081c10958c01aa02050820108b79aa0205082110eb7aaa0205082210a275aa0206082310dc8701aa0205082b10f476aa0205083110f476aa0206083910918a01aa0206083d10918a01aa0206084110918a01aa0205084910e432aa0205084d10e432aa0206083410918a01aa0205082810e432aa0205082910e432c2022112041a0201041a090848120501040506071a0508501201631a0508511201652200ea02520a4c68747470733a2f2f67726170682e66616365626f6f6b2e636f6d2f76392e302f3237373631373532363237343633352f706963747572653f77696474683d313630266865696768743d31363010011801f202090887cab5ee0110870a8a030808021003180528019203009803f3e78ea30ba20315e298afd986d8a7d8acd988d986d98ae298afe29c9432d00208{self.EncryptedPlayerid}120b1a024d452096ed8baa0628043089cbd13038324214fa96e660b599a361c19de061aab9ce64abb9ce64480150c90158e80792010601090a1219209801c901c00101c80101e80101880204920206ee07ce010000aa0208080110ff34188064aa020b080f10fd3218b086012001aa0205080210e432aa0205081810fd32aa0205081a10fd32aa0205081c10fd32aa0205082010fd32aa0205082210fd32aa0205082110fd32aa0205081710e432aa0205082310fd32aa0205082b10fd32aa0205083110fd32aa0205083910fd32aa0205083d10fd32aa0205084110fd32aa0205084910d836aa0205084d10e432aa0205081b10fd32aa0205083410fd32aa0205082810e432aa0205082910e432c2022112041a0201041a090848120501040506071a0508501201631a0508511201652200ea0204100118018a03009203003a0101400150016801721e313639383838363035353130343733333939355f6a67386c37333431646688018090aefec3978fef17a20100b001e001ea010449444331") 
+            data = bytes.fromhex(f"050000002008{id_add}100520162a1408aae2cafb0210d7c2bbb1032a0608{id_add}") 
           #  data2 = bytes.fromhex(f"120000013808{self.EncryptedPlayerid}101220022aab0208{id_add}10{self.EncryptedPlayerid}18022889e7aba8063803428c017b22636f6e74656e74223a22545f32365f415f504f5f4d45535f31222c22697352657175657374223a747275652c2269734163636570746564223a66616c73652c22726561736f6e223a302c2274696d65223a302c2267616d65537461727454696d65223a302c226d617463684d6f6465223a302c2267616d654d6f6465223a302c226d61704944223a307d4a2c0a15d981d8b1d8b5d9875fd8b3d8b9d98ad8afd9873a2910b6c58fae0318bea9d2ad0320d90128d9aff8b1035202656e6a520a4c68747470733a2f2f67726170682e66616365626f6f6b2e636f6d2f76392e302f3731363937353732323035333131382f706963747572653f77696474683d313630266865696768743d31363010011801")
          #   data = re.sub(r'fb9db9ae06', id, data)
             
@@ -507,6 +507,8 @@ class Proxy:
             print(f"Request failed for ID {iddd}: {e}")
         except json.JSONDecodeError:
             print(f"Invalid JSON response for ID {iddd}: {res.text}")
+            
+            
     def handle_id(self, iddd):
         if '***' in iddd:
             iddd = iddd.replace('***', '106')
@@ -782,79 +784,68 @@ class Proxy:
         while True:
             
             dataS ,addreOP = sock.recvfrom(1024)
-         #   print(dataS)
-        #----<<<Command>>>---- 
-            # ----5mode----
-            # if b"/5s" in dataS:  #OP1
             
-            
-                # self.Sqd_Fox=True
-                # Thread(target=self.SQDFOX).start()
-                
-            
-            if b"/sqoud5" in dataS:   #op2
-            #    threading.Thread(target=self.gen_squad5).start()
-                data = bytes.fromhex(f"05000001ff08{self.EncryptedPlayerid}1005203a2af20308{self.EncryptedPlayerid}12024d451801200432f70208{self.EncryptedPlayerid}1209424c52585f4d6f642b1a024d4520d78aa5b40628023085cbd1303832421880c38566fa96e660c19de061d998a36180a89763aab9ce64480150c90158e80792010801090a12191a1e209801c901c00101e801018802039202029603aa0208080110e43218807daa0207080f10e4322001aa0205080210e432aa0205081810e432aa0205081a10e432aa0205081c10e432aa0205082010e432aa0205082210e432aa0205082110e432aa0205081710e432aa0205082310e432aa0205082b10e432aa0205083110e432aa0205083910e432aa0205083d10e432aa0205084110e432aa0205084910e432aa0205084d10e432aa0205081b10e432aa0205083410e432aa0205082810e432aa0205082910e432c2022812041a0201041a0508501201631a060851120265661a0f0848120b0104050607f1a802f4a8022200ea0204100118018a03009203009803b7919db30ba20319c2b27854e19687e197a95fe191ade192aae197a95945e19687e20301523a011a403e50056801721e313732303237323231313638373535353930315f736f3278687a61366e347801820103303b30880180e0aecdacceba8e19a20100b00114ea010449444332fa011e313732303237323231313638373535383330335f71356f79736b3934716d")
-                self.client0500.send(data)
-                
-            if b"/sqoud6" in dataS:   #OP3
-                data = bytes.fromhex(f"05000001ff08{self.EncryptedPlayerid}1005203a2af20308{self.EncryptedPlayerid}12024d451801200432f70208{self.EncryptedPlayerid}1209424c52585f4d6f642b1a024d4520d78aa5b40628023085cbd1303832421880c38566fa96e660c19de061d998a36180a89763aab9ce64480150c90158e80792010801090a12191a1e209801c901c00101e801018802039202029603aa0208080110e43218807daa0207080f10e4322001aa0205080210e432aa0205081810e432aa0205081a10e432aa0205081c10e432aa0205082010e432aa0205082210e432aa0205082110e432aa0205081710e432aa0205082310e432aa0205082b10e432aa0205083110e432aa0205083910e432aa0205083d10e432aa0205084110e432aa0205084910e432aa0205084d10e432aa0205081b10e432aa0205083410e432aa0205082810e432aa0205082910e432c2022812041a0201041a0508501201631a060851120265661a0f0848120b0104050607f1a802f4a8022200ea0204100118018a03009203009803b7919db30ba20319c2b27854e19687e197a95fe191ade192aae197a95945e19687e20301523a011a403e50056801721e313732303237323231313638373535353930315f736f3278687a61366e347801820103303b30880180e0aecdacceba8e19a20100b00114ea010449444332fa011e313732303237323231313638373535383330335f71356f79736b3934716d")
-                self.remote0500.send(data)
-            if b"/backsqd" in dataS:   #OP4
+            if b"/backsqd" in dataS:   #OP2
                 self.remote0500.send(self.data_join)
-            if b"/backspam" in dataS:  #OP5
-                self.remote0500.send(self.data_back)
-            if b"/-backspam" in dataS: 
-                self.spamantikick=False
-            #----Spam Invit----
-            if b"/spysqd" in dataS:   #OP6
-                self.client0500.send(spypack)
-            #    socktion.send(packet)
-           #     threading.Thread(target=self.squad_rom_invisible).start()
-            if b"/-spysqd" in dataS:
-                spy = False
-           #     restart()
-            #----Bot Comand----
-            if b"/spyroom" in dataS:   #OP7
-                recode_packet = True
-              #  threading.Thread(target=self.squad_rom_invisible).start()
-            if b"/-spyroom" in dataS:
-                self.remote0500.send(bytes.fromhex(packet_start))
-          #      restart()     
-            #----Server Change----
-            if b"/invspam" in dataS:  #OP8
+       
+                         
+            if b"/backspam" in dataS:   #OP3
+                self.spamantikick = True
+                Thread(target=self.adding_youtoubrs).start()
+          
+              
+            if b"/-backspam" in dataS:   #OP3
+                self.spamantikick = False
+                
+                
+            if b"/spysqd" in dataS:  #OP4
+                Thread(target=self.squad_rom_invisible).start()
+            if b"/-spysqd" in dataS:  #OP4
+                self.remote0500.send(dataC)
+            
+            
+            if b"/invspam" in dataS:  #OP5
                 spam_inv = True
                 spam_room = True
-            if b"/-invspam" in dataS:
+            if b"/-invspam" in dataS:   #OP5
                 spam_inv = False
                 spam_room = False
-            #----LVL ++----
-            if b"/fakefr" in dataS:  #OP9
-                threading.Thread(target=self.adding_youtoubrs).start()
-            if b"/foxybot" in dataS:   #O10
+            
+            
+            if b"/fakefr" in dataS:  #OP6
+                Thread(target=self.adding_youtoubrs).start()
+
+                
+            if b"/foxybot" in dataS:   #OP7
                  self.client0500.send(bytes.fromhex("060000006f08d4d7faba1d100620022a6308cfc590f12a1a1c5b3030464630305d2b2be385a4434f44455820205b3030464630305d32024d454040b00113b801e71cd801d4d8d0ad03e00191db8dae03ea010a5a45522d49534b494e47f00101f801911a8002fd98a8dd03900201d0020ad80221"))
-               #  threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), f"[b][i][c][7cfc00] - Code Room : {get_room_code}\n By : CODEX TEAM&PARA HEX", 0.001)).start()
-        #----<<<Options>>>----
-          #  if b"OP1" in dataS:
-          #      sock.sendto("ON".encode(),addreOP)
+            if b"/-foxybot" in dataS:   #OP7
+                 print("OFF")
+            if b"/addgold" in dataS:   #OP8
+                 Thread(target=self.adding_1mG_16kD).start()
+            if b"/-addgold" in dataS:   #OP8
+                 Thread(target=self.adding_gold).start()
+            if b"/activ2" in dataS:   #OP9
+                 print("OFFLINE")
+            if b"/-activ2" in dataS:   #OP9
+                 print("OFFLINE")
             if b"OP2" in dataS:
-                sock.sendto("ON".encode(),addreOP)
+                sock.sendto("OFF".encode(),addreOP)
             if b"OP3" in dataS:
-                sock.sendto("ON".encode(),addreOP)
+                sock.sendto("OFF".encode(),addreOP)
             if b"OP4" in dataS:
-                sock.sendto("ON".encode(),addreOP)
+                sock.sendto("OFF".encode(),addreOP)
             if b"OP5" in dataS:
-                sock.sendto("ON".encode(),addreOP)
+                sock.sendto("OFF".encode(),addreOP)
             if b"OP6" in dataS:
-                sock.sendto("ON".encode(),addreOP)
+                sock.sendto("OFF".encode(),addreOP)
             if b"OP7" in dataS:
                 sock.sendto("OFF".encode(),addreOP)
             if b"OP8" in dataS:
-                sock.sendto("ON".encode(),addreOP)
+                sock.sendto("OFF".encode(),addreOP)
             if b"OP9" in dataS:
-                sock.sendto("ON".encode(),addreOP)
+                sock.sendto("OFF".encode(),addreOP)
             if b"OP10" in dataS:
-                sock.sendto("ON".encode(),addreOP)
+                sock.sendto("OFF".encode(),addreOP)
             
     def SpamAntiKick( self ):
         while self.spamantikick==True:

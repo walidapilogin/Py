@@ -841,11 +841,11 @@ class Proxy:
                  
                  
             if b"OP2" in dataS:
-                sock.sendto("OFF".encode(),addreOP)
+                sock.sendto("ON".encode(),addreOP)
             if b"OP3" in dataS:
-                sock.sendto("OFF".encode(),addreOP)
+                sock.sendto("ON".encode(),addreOP)
             if b"OP4" in dataS:
-                sock.sendto("OFF".encode(),addreOP)
+                sock.sendto("ON".encode(),addreOP)
             if b"OP5" in dataS:
                 sock.sendto("OFF".encode(),addreOP)
             if b"OP6" in dataS:
@@ -857,7 +857,7 @@ class Proxy:
             if b"OP9" in dataS:
                 sock.sendto("OFF".encode(),addreOP)
             if b"OP10" in dataS:
-                sock.sendto("OFF".encode(),addreOP)
+                sock.sendto("ON".encode(),addreOP)
             
     def SpamAntiKick( self ):
         while self.spamantikick==True:

@@ -288,8 +288,8 @@ def adjust_text_length(text, target_length=22, fill_char="20"):
         return text
 ####################################
 
-Premium = False
-Free = False
+Premium = True
+Free = True
 
 fake_friend = False
 spam_room = False
@@ -860,7 +860,10 @@ class Proxy:
                 sock.sendto("OFF".encode(),addreOP)
             if b"OP9" in dataS and Premium ==True:
                 sock.sendto("ON".encode(),addreOP)
+                
             else:
+            
+            if b"OP9" in dataS and Premium ==False:
                 sock.sendto("OFF".encode(),addreOP)
             if b"OP10" in dataS and Premium ==True:
                 sock.sendto("ON".encode(),addreOP)

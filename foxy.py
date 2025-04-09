@@ -287,6 +287,10 @@ def adjust_text_length(text, target_length=22, fill_char="20"):
     else:
         return text
 ####################################
+
+Premium = True
+Free = True
+
 fake_friend = False
 spam_room = False
 spam_inv = False
@@ -785,79 +789,84 @@ class Proxy:
             
             dataS ,addreOP = sock.recvfrom(1024)
             
-            if b"/backsqd" in dataS:   #OP2
+            if b"/backsqd" in dataS and Free ==True:  #OP2
                 self.remote0500.send(self.data_join)
        
                          
-            if b"/backspam" in dataS:   #OP3
+            if b"/backspam" in dataS and Free ==True:  #OP3
                 self.spamantikick = True
                 Thread(target=self.adding_youtoubrs).start()
           
               
-            if b"/-backspam" in dataS:   #OP3
+            if b"/-backspam" in dataS and Free ==True:  #OP3
                 self.spamantikick = False
                 
                 
-            if b"/spysqd" in dataS:  #OP4
+            if b"/spysqd" in dataS and Free ==True:  #OP4
                 Thread(target=self.squad_rom_invisible).start()
             if b"/-spysqd" in dataS:  #OP4
                 self.remote0500.send(dataC)
             
             
-            if b"/invspam" in dataS:  #OP5
+            if b"/invspam" in dataS and Free ==True: #OP5
                 spam_inv = True
                 spam_room = True
-            if b"/-invspam" in dataS:   #OP5
+            if b"/-invspam" in dataS and Free ==True: #OP5
                 spam_inv = False
                 spam_room = False
             
             
-            if b"/fakefr" in dataS:  #OP6
+            if b"/fakefr" in dataS and Free ==True: #OP6
                 Thread(target=self.adding_youtoubrs).start()
 
                 
-            if b"/foxybot" in dataS:   #OP7
+            if b"/foxybot" in dataS and Free ==True:  #OP7
                  self.client0500.send(bytes.fromhex("060000006f08d4d7faba1d100620022a6308cfc590f12a1a1c5b3030464630305d2b2be385a4434f44455820205b3030464630305d32024d454040b00113b801e71cd801d4d8d0ad03e00191db8dae03ea010a5a45522d49534b494e47f00101f801911a8002fd98a8dd03900201d0020ad80221"))
-            if b"/-foxybot" in dataS:   #OP7
+            if b"/-foxybot" in dataS and Free ==True:   #OP7
                  print("OFF")
                  
                  
-            if b"/addgold" in dataS:   #OP8
+            if b"/addgold" in dataS and Free ==True:   #OP8
                  Thread(target=self.adding_1mG_16kD).start()
-            if b"/-addgold" in dataS:   #OP8
+            if b"/-addgold" in dataS and Free ==True: #OP8
                  Thread(target=self.adding_gold).start()
                  
                  
-            if b"/activ2" in dataS:   #OP9
+            if b"/activ2" in dataS and Premium ==True:   #OP9
                  print("OFFLINE")
-            if b"/-activ2" in dataS:   #OP9
-                 print("OFFLINE")
-                 
-                 
-            if b"/activ3" in dataS:   #OP9
-                 print("OFFLINE")
-            if b"/-activ3" in dataS:   #OP9
+            if b"/-activ2" in dataS and Premium ==True:  #OP9
                  print("OFFLINE")
                  
                  
-            if b"OP2" in dataS:
+            if b"/activ3" in dataS and Premium ==True:  #OP10
+                 print("OFFLINE")
+            if b"/-activ3" in dataS and Premium ==True: #OP10
+                 print("OFFLINE")
+                 
+                 
+            if b"OP2" in dataS and Free ==True:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP3" in dataS:
+            if b"OP3" in dataS and Free ==True:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP4" in dataS:
+            if b"OP4" in dataS and Free ==True:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP5" in dataS:
+            if b"OP5" in dataS and Free ==True:
                 sock.sendto("OFF".encode(),addreOP)
-            if b"OP6" in dataS:
+            if b"OP6" in dataS and Free ==True:
                 sock.sendto("OFF".encode(),addreOP)
-            if b"OP7" in dataS:
+            if b"OP7" in dataS and Free ==True:
                 sock.sendto("OFF".encode(),addreOP)
-            if b"OP8" in dataS:
+            if b"OP8" in dataS and Free ==True:
                 sock.sendto("OFF".encode(),addreOP)
-            if b"OP9" in dataS:
-                sock.sendto("OFF".encode(),addreOP)
-            if b"OP10" in dataS:
+            if b"OP9" in dataS and Premium ==True:
                 sock.sendto("ON".encode(),addreOP)
+            else:
+                sock.sendto("OFF".encode(),addreOP)
+            if b"OP10" in dataS and Premium ==True:
+                sock.sendto("ON".encode(),addreOP)
+            else:
+                sock.sendto("OFF".encode(),addreOP)
+                
             
     def SpamAntiKick( self ):
         while self.spamantikick==True:

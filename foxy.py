@@ -288,8 +288,8 @@ def adjust_text_length(text, target_length=22, fill_char="20"):
         return text
 ####################################
 
-Premium = False
-Free = False
+Premium = True
+Free = True
 
 fake_friend = False
 spam_room = False
@@ -689,7 +689,7 @@ class Proxy:
                     
                     
                 if bot_true and  b"/help" in dataS:
-                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]Welcome Foxybot v3\n   Commands :", 0.1)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][FFF000]Welcome Foxybot v3\n   Commands :", 0.1)).start()
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b]/d5 --> 5 Sqoud\n/d6 --> 6 Sqoud", 0.3)).start()
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b]/spysqd --> Invisible Sqd\n/spyroom --> Invisible Room", 0.5)).start()
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][7cfc00]\spam --> Invitation Spam\n/room --> Spam Room", 0.7)).start()
@@ -700,7 +700,6 @@ class Proxy:
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][00FF00]/emotes --> Dance Player #3", 1.6)).start()
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b]/info+ <id> --> Player Info\n/region+ --> Player region", 1.8)).start()
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[EFF000][b]/add <id> --> add Friend", 2.0)).start()
-                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[FF0000][b]/add <id> --> add Friend\n We alway Here for you\n Thanks For Using Foxybot \n To use cmd..", 2.2)).start()
                     
                     
                 if bot_true and  b'/EMT' in dataS:

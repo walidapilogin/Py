@@ -8,7 +8,7 @@ import struct
 import random
 import urllib3
 from datetime import datetime
-
+import netifaces
 import platform
 Premium = False
 Free = False
@@ -21,18 +21,44 @@ def is_valid_ipv4(ip_address):
     except OSError:
        return False
 
+
+
 def get_device_ip():
+    # """Gets the device's IP address, handling various failure scenarios."""
+    ip_address = None
 
     try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(("8.8.8.8", 80)) 
-        ip_address = s.getsockname()[0]
-        s.close()
-        return ip_address
-    except Exception as e:
-        print(f"Error getting IP: {e}")
-        Premium = False
-        return None
+        # Try netifaces first (more reliable)
+        interfaces = netifaces.interfaces() # Get all network interfaces
+        for iface_name in interfaces:
+            addrs = netifaces.ifaddresses(iface_name)
+            if netifaces.AF_INET in addrs: # Check for IPv4 addresses
+                for addr in addrs[netifaces.AF_INET]:
+                    ip = addr['addr']
+                    if ip != '127.0.0.1': # Exclude loopback address
+                        ip_address = ip
+                        break # Use the first non-loopback IP found
+            if ip_address: # Exit outer loop also after IP is found.
+                break
+
+    except (ImportError, OSError) as e: # Handle import/netifaces errors.
+        print(f"Error using netifaces: {e}. Falling back to basic method...")
+
+        try: # Fallback to the simpler method in case netifaces isn't available.
+             s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+             s.connect(("8.8.8.8", 80)) # Use 1.1.1.1 or other public DNS as alternatives
+             ip_address = s.getsockname()[0]
+             s.close()
+
+        except Exception as e:
+             print(f"Error getting IP: {e}")
+
+    return ip_address
+
+
+# ... (rest of your code)
+
+
 
 def check_and_enable_premium(expected_ips): 
     Premium = False
@@ -52,7 +78,7 @@ def check_and_enable_premium(expected_ips):
 
     return Premium
 
-expected_ips = ["192.168.1.104", "192.168.1.103", "10.0.0.1", "192.168.1.100", "192.168.1.200"] 
+expected_ips = ["192.168.1.104", "192.168.1.107", "10.0.0.1", "192.168.1.100", "192.168.1.200"] 
 premium_status = check_and_enable_premium(expected_ips)
 
 

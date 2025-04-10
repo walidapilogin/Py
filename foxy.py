@@ -8,9 +8,7 @@ import struct
 import random
 import urllib3
 from datetime import datetime
-import platform
-Premium = False
-Free = True
+
 ####################################
 
 # def is_valid_ipv4(ip_address):

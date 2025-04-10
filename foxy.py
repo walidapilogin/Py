@@ -10,7 +10,7 @@ import urllib3
 from datetime import datetime
 import platform
 Premium = False
-Free = True
+#####Free = True
 ####################################
 
 # def is_valid_ipv4(ip_address):
@@ -928,10 +928,15 @@ class Proxy:
             if b"OP8" in dataS:
                 sock.sendto("ON".encode(),addreOP)
             if b"OP9" in dataS:
-                sock.sendto("ON".encode(),addreOP)
+                if Premium==True:
+                    sock.sendto("ON".encode(),addreOP)
+                elif Premium==False:
+                    sock.sendto("OFF".encode(),addreOP)
+                else:
+                    print("Error")
             if b"OP10" in dataS:
                 sock.sendto("ON".encode(),addreOP)
-
+ 
  
                 
             

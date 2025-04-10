@@ -288,8 +288,8 @@ def adjust_text_length(text, target_length=22, fill_char="20"):
         return text
 ####################################
 
-Premium = False
-Free = True
+Premium = True
+Free = False
 
 fake_friend = False
 spam_room = False

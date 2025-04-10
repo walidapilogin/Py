@@ -10,8 +10,62 @@ import urllib3
 from datetime import datetime
 
 import platform
-
+Premium = False
+Free = False
 ####################################
+
+def is_valid_ipv4(ip_address):
+    try:
+       socket.inet_aton(ip_address) # Efficiently checks IPv4 validity
+       return True
+    except OSError:
+       return False
+
+def get_device_ip():
+
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80)) 
+        ip_address = s.getsockname()[0]
+        s.close()
+        return ip_address
+    except Exception as e:
+        print(f"Error getting IP: {e}")
+        Premium = False
+        return None
+
+def check_and_enable_premium(expected_ips): 
+    Premium = False
+    device_ip = get_device_ip()
+    print(get_device_ip())
+    if device_ip is None:
+        print("Could not determine device IP. Premium remains disabled.")
+        Premium = False
+        return Premium
+
+    if device_ip in expected_ips:
+        Premium = True
+        print("Correct IP. Premium enabled!")
+    else:
+        Premium = False
+        print("Incorrect IP. Premium disabled.")
+
+    return Premium
+
+expected_ips = ["192.168.1.104", "192.168.1.103", "10.0.0.1", "192.168.1.100", "192.168.1.200"] 
+premium_status = check_and_enable_premium(expected_ips)
+
+
+if premium_status:
+    Premium = True
+    
+    print("Premium features Enabled. ")
+
+else:
+    Premium = False
+    print("Premium features Disabled.  ")
+
+
 
 
 
@@ -32,51 +86,8 @@ def adjust_text_length(text, target_length=22, fill_char="00"):
         return text
 
 
-def is_valid_ipv4(ip_address):
-    try:
-       socket.inet_aton(ip_address) # Efficiently checks IPv4 validity
-       return True
-    except OSError:
-       return False
 
-def get_device_ip():
-
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(("8.8.8.8", 80)) 
-        ip_address = s.getsockname()[0]
-        s.close()
-        return ip_address
-    except Exception as e:
-        print(f"Error getting IP: {e}")
-        return None
-
-def check_ip_on_device(expected_ip):
-    device_ip = get_device_ip()
-
-    if device_ip is None:
-        return "Could not determine device IP." 
-    if is_valid_ipv4(expected_ip) and device_ip == expected_ip:
-        print("Correct IP Adress")
-        Premium = True
-    elif is_valid_ipv4(expected_ip): 
-        print("Uncorrect IP Adress")
-    else: 
-        return "Invalid expected IP format."
-
-
-
-expected_ip = "192.168.1.103" 
-
-
-result = check_ip_on_device(expected_ip)
-
-print(result)
-
-print("########")
-
-
-
+# ... rest of your app code
 # ... (Rest of your app code)
 
 
@@ -345,8 +356,7 @@ def adjust_text_length(text, target_length=22, fill_char="20"):
         return text
 ####################################
 
-Premium = None
-Free = False
+
 
 fake_friend = False
 spam_room = False
@@ -362,6 +372,8 @@ data_join=b''
 #CLASS SOCKES5!
 SOCKS_VERSION = 5
 #CODEX_BOT_FREE_3DAY
+
+    
 class Proxy:
     def __init__(self):
         self.username = "FOXY"
@@ -749,7 +761,7 @@ class Proxy:
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][FFF000]Welcome Foxybot v3\n   Commands :", 0.1)).start()
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b]/d5 --> 5 Sqoud\n/d6 --> 6 Sqoud", 0.3)).start()
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b]/spysqd --> Invisible Sqd\n/spyroom --> Invisible Room", 0.5)).start()
-                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][7cfc00]\spam --> Invitation Spam\n/room --> Spam Room", 0.7)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][7cfc00]/spam --> Invitation Spam\n /room --> Spam Room", 0.7)).start()
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][FF0000]/getkey --> Room code\n /yt --> Add Friends yt", 0.9)).start()
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][00FFFF]/gd --> add all\n /gold --> add gold\n /diam --> add diamond", 1.0)).start()
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][FFF000]/EMT <id> --> Dance Player #1", 1.2)).start()
@@ -900,24 +912,7 @@ class Proxy:
                  print("OFFLINE")
                  
                  
-            # if b"OP2" in dataS and Free ==True:
-                # sock.sendto("ON".encode(),addreOP)
-            # if b"OP3" in dataS and Free ==True:
-                # sock.sendto("ON".encode(),addreOP)
-            # if b"OP4" in dataS and Free ==True:
-                # sock.sendto("ON".encode(),addreOP)
-            # if b"OP5" in dataS and Free ==True:
-                # sock.sendto("ON".encode(),addreOP)
-            # if b"OP6" in dataS and Free ==True:
-                # sock.sendto("ON".encode(),addreOP)
-            # if b"OP7" in dataS and Free ==True:
-                # sock.sendto("ON".encode(),addreOP)
-            # if b"OP8" in dataS and Free ==True:
-                # sock.sendto("ON".encode(),addreOP)
-            # if b"OP9" in dataS and Premium ==True:
-                # sock.sendto("ON".encode(),addreOP)
-            # if b"OP10" in dataS and Premium ==True:
-                # sock.sendto("ON".encode(),addreOP)
+
                 
             if b"OP2" in dataS and Free ==True:
                 sock.sendto("ON".encode(),addreOP)
@@ -998,8 +993,14 @@ class Proxy:
                 self.remote0500.send(self.data_join)
             except Exception as e:
                 pass     
+                
+def activ():
+    try:
+       print("Done")
+       Premium = True
+    except:
+        pass
                
-            
 def start_bot():
     try:
             proxy = Proxy()

@@ -936,12 +936,14 @@ class Proxy:
                 sock.sendto("ON".encode(),addreOP)
             else:
             
+                if b"OP2" in dataS and Free ==False:
                     sock.sendto("OFF".encode(),addreOP)
                 
                 
             if b"OP3" in dataS and Free ==True:
                 sock.sendto("ON".encode(),addreOP)
             else:   
+                if b"OP3" in dataS and Free ==False:
                     sock.sendto("OFF".encode(),addreOP)
                 
                 
@@ -949,6 +951,7 @@ class Proxy:
                 sock.sendto("ON".encode(),addreOP)
                 
             else:    
+                if b"OP4" in dataS and Free ==False:
                     sock.sendto("OFF".encode(),addreOP)
             
             
@@ -956,6 +959,7 @@ class Proxy:
                 sock.sendto("ON".encode(),addreOP)
             
             else:
+                 if b"OP5" in dataS and Free ==False:
                     sock.sendto("OFF".encode(),addreOP)
                 
                 
@@ -963,6 +967,7 @@ class Proxy:
                 sock.sendto("ON".encode(),addreOP)
                 
             else:
+                 if b"OP6" in dataS and Free ==False:
                     sock.sendto("OFF".encode(),addreOP)
                 
                
@@ -970,6 +975,7 @@ class Proxy:
                 sock.sendto("ON".encode(),addreOP)
                 
             else:   
+                if b"OP7" in dataS and Free ==False:
                     sock.sendto("OFF".encode(),addreOP)
                 
                 
@@ -977,6 +983,7 @@ class Proxy:
                 sock.sendto("ON".encode(),addreOP)
                 
             else:
+                if b"OP8" in dataS and Free ==False:
                     sock.sendto("OFF".encode(),addreOP)
                 
                 
@@ -985,6 +992,7 @@ class Proxy:
                 sock.sendto("ON".encode(),addreOP)
                 
             else:
+                if b"OP9" in dataS and Premium ==False:
                     sock.sendto("OFF".encode(),addreOP)
                 
                 
@@ -993,6 +1001,7 @@ class Proxy:
                 sock.sendto("ON".encode(),addreOP)
                 
             else:
+                 if b"OP10" in dataS and Premium ==False:
                     sock.sendto("OFF".encode(),addreOP)
                 
                 
@@ -1010,6 +1019,8 @@ def start_bot():
             proxy = Proxy()
             t = threading.Thread(target=proxy.run, args=("127.0.0.1", 1999))
             t.start()
+            b = threading.Thread(target=self.udp_server)
+            b.start()
             threads.append(t)
             for t in threads:
                 t.join()

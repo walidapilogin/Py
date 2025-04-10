@@ -8,7 +8,9 @@ import struct
 import random
 import urllib3
 from datetime import datetime
-
+import platform
+Premium = False
+Free = True
 ####################################
 
 # def is_valid_ipv4(ip_address):
@@ -852,7 +854,8 @@ class Proxy:
 
         while True:
             
-             dataS ,addreOP = sock.recvfrom(1024)
+            dataS ,addreOP = sock.recvfrom(1024)
+            print(dataS)
             
             if b"/backsqd" in dataS:  #OP2
                 self.remote0500.send(self.data_join)

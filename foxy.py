@@ -928,12 +928,7 @@ class Proxy:
             if b"OP8" in dataS:
                 sock.sendto("ON".encode(),addreOP)
             if b"OP9" in dataS:
-                if Premium==True:
-                    sock.sendto("ON".encode(),addreOP)
-                elif Premium==False:
-                    sock.sendto("OFF".encode(),addreOP)
-                else:
-                    print("Error")
+                sock.sendto("OFF".encode(),addreOP)
             if b"OP10" in dataS:
                 sock.sendto("ON".encode(),addreOP)
  

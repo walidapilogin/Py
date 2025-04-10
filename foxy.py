@@ -11,7 +11,27 @@ from datetime import datetime
 import platform
 Premium = False
 Free = True
-##UPDATE
+
+
+import random
+def generate_random_hex_color():
+    # List of top 50 colors without #
+    top_colors = [
+        "FF4500", "FFD700", "32CD32", "87CEEB", "9370DB",
+        "FF69B4", "8A2BE2", "00BFFF", "1E90FF", "20B2AA",
+        "00FA9A", "008000", "FFFF00", "FF8C00", "DC143C",
+        "FF6347", "FFA07A", "FFDAB9", "CD853F", "D2691E",
+        "BC8F8F", "F0E68C", "556B2F", "808000", "4682B4",
+        "6A5ACD", "7B68EE", "8B4513", "C71585", "4B0082",
+        "B22222", "228B22", "8B008B", "483D8B", "556B2F",
+        "800000", "008080", "000080", "800080", "808080",
+        "A9A9A9", "D3D3D3", "F0F0F0"
+    ]
+    # Select a random color from the list
+    random_color = random.choice(top_colors)
+    return random_color
+
+##UPDATE v1
 ####################################
 
 def is_valid_ipv4(ip_address):
@@ -527,6 +547,8 @@ class Proxy:
                         
                         
                         
+                        
+                        
                 if "0500" in dataS.hex()[0:4]:
                     self.client0500 = client
 
@@ -606,6 +628,14 @@ class Proxy:
                     
                     
                     
+                if bot_true and  b"/b1" in dataS:
+                    messag = f'\x12\x00\x00\x00\xfa\x08\xcf\xc5\x90\xf1*\x10\x12 \x02*\xed\x01\x08\x8f\x8b\xc7\xf5*\x10\xcf\xc5\x90\xf1*\x18\x02(\xba\xa1\xe1\xbf\x06B3{"StickerStr":"[1=1200000001-11]","type":"Sticker"}J)\n\x0bFoxyTeamv33 \xad\x02B\x17\xc5\xa4\xe1\xba\xb8\xc3\x83\xcf\xba\xe1\xba\xb8\xc4\xb9\xc5\x98\xe1\xbb\x96\xc4\x8e\xc3\x83R\x02arjf\n`https://lh3.googleusercontent.com/a/ACg8ocJvEMyfsol379JGYCN46OnUvNQwlsE-nKn2wvEtxzxUjk-PXg=s96-c\x10\x01\x18\x01r\x00\x80\x01\x80\xc0\x83\xac\xd9\xf2\xd6\xc1\x1a'
+                    self.client0500.send(messag)
+                
+                if bot_true and  b"/b2" in dataS:
+                    message1 = f'12000001c008cfc590f12a101220022ab30308cfc590f12a108f8bc7f52a18022297025b425d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d5b4646303030305d5b425d49206469646e277420756e6465727374616e6420796f752077656c6c3f20446f20796f75206d65616e2074686520636f6d6d616e64206c6973743fe380903f636d64e380910a20535550504f5254203a0a5b4646443730305d5b425d496e7374616772616d202d3e5b4646464646465d5b495d20407468655f666f78793939390a5b4646443730305d5b425d54656c656772616d202d3e5b4646464646465d5b495d2040466f78796f6666696369616c310a5b425d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d28bba1e1bf064a200a0a466f7879626f745f763110c2db8dae0318fd96d3ad0320ca025001589b015202656e6a520a4c68747470733a2f2f67726170682e66616365626f6f6b2e636f6d2f76392e302f3130343037363437313936353338302f706963747572653f77696474683d313630266865696768743d31363010011801800180c083c8dcf2d6c11a'
+                    self.client0500.send(bytes.fromhex(message1))
+                
                     
                 if bot_true and  b"/help" in dataS:
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), f"{generate_random_color()}Welcome Foxybot v3\n   Commands :", 0.1)).start()
@@ -651,6 +681,9 @@ class Proxy:
                     id = str(i).split("(\\x")[0].strip()
                     self.client0500.send(bytes.fromhex(emotes(self.EncryptedPlayerid, id)))
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00] Sucessfully ", 0.2)).start()
+
+
+
 
                 if client.send(dataS) <= 0:
                     break
@@ -724,7 +757,8 @@ class Proxy:
             if b"/spysqd" in dataS:#OP4
                 Thread(target=self.squad_rom_invisible).start()
             if b"/-spysqd" in dataS:  #OP4
-                self.remote0500.send(dataC)
+          #      self.remote0500.send(dataC)
+                 print("OFF")
                 
             
             

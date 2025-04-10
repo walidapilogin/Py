@@ -10,8 +10,8 @@ import urllib3
 from datetime import datetime
 import platform
 Premium = False
-Free = False
-#FOXY BOTT
+Free = True
+##UPDATE 1111111
 ####################################
 
 def is_valid_ipv4(ip_address):
@@ -65,32 +65,6 @@ else:
     Premium = False
     print("Premium features Disabled.  ")
 
-
-
-
-
-
-
-def adjust_text_length(text, target_length=22, fill_char="00"):
-    # إذا كان النص أطول من العدد المستهدف من الأحرف
-    if len(text) > target_length:
-        return text[:target_length]
-    # إذا كان النص أقصر من العدد المستهدف من الأحرف
-    elif len(text) < target_length:
-        # نحتاج لإضافة "20" كملء للنص
-        fill_length = target_length - len(text)
-        # نجمع النص الأصلي مع النص المضاف
-        return text + (fill_char * (fill_length // len(fill_char)))[:fill_length]
-    # إذا كان النص بالفعل بطول العدد المستهدف من الأحرف
-    else:
-        return text
-
-
-
-# ... rest of your app code
-# ... (Rest of your app code)
-
-
 def generate_random_color():
 	color_list = [
     "[FFFFE0][b][c]", 
@@ -132,24 +106,8 @@ def generate_random_color():
 ]
 	random_color = random.choice(color_list)
 	return  random_color
-def restart():
-    print("arvg ",sys.argv)
-    print("exutable :" ,sys.executable)
-    print("restarting script Now ! ! ")
-    os.execv(sys.executable,['python'] +sys.argv)
-bot_codes = b""
-bot_true = True 
-def Get_bot_Code():
-    global bot_codes
-    url_api = "https://projects-fox-apis.vercel.app/get_code?key=projects_xxx_3ei93k_codex_xdfox"
-    res = requests.get(url_api)  
-    if res.status_code == 200:
-        raw_data = res.text.strip()
-        cleaned_codes = [code.strip('b"') for code in raw_data.split()]
-        bot_codes = b" ".join(code.encode('utf-8') for code in cleaned_codes)
-        print("تم جلب الأكواد بنجاح:", bot_codes)
-    else:
-        print("فشل في جلب الأكواد:", res.status_code)
+
+
 ####################################
 def Decrypted_id(id_value):
     url = f"https://api-delta-two.vercel.app/decrypt_id?id={id_value}"
@@ -159,25 +117,6 @@ def Decrypted_id(id_value):
         return data.get("decrypted_id")
     else:
         return f"{id_value}"
-def telegram(message):
-    token = "7942911541:AAHcdHjMqscehzSAVfUkG4GW4VSHi0BFqhI"
-    chat_id = "-4749183314"
-    url = f'https://api.telegram.org/bot{token}/sendMessage'
-    payload = {
-        'chat_id': chat_id,
-        'text': message
-    }
-    response = requests.post(url, data=payload)
-def send_telegram_message(message):
-    time.sleep(0.2)
-    try:
-        telegram(message)
-    except KeyError as e:
-        print("Error parsing data:", e)
-        return None
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return None
 def emotes(id, emote_nmbr=None):
     Fox_Emote = [
 f"050000002008{id}100520162a1408aae2cafb0210d6fbb8b1032a0608{id}",
@@ -459,12 +398,9 @@ class Proxy:
         self.client0500.send(bytes.fromhex(packet_6))
         
     def gen_squad5(self):
-         data = bytes.fromhex(f"05000001ff08{self.EncryptedPlayerid}1005203a2af20308{self.EncryptedPlayerid}12024d451801200432f70208{self.EncryptedPlayerid}1209424c52585f4d6f642b1a024d4520d78aa5b40628023085cbd1303832421880c38566fa96e660c19de061d998a36180a89763aab9ce64480150c90158e80792010801090a12191a1e209801c901c00101e801018802039202029603aa0208080110e43218807daa0207080f10e4322001aa0205080210e432aa0205081810e432aa0205081a10e432aa0205081c10e432aa0205082010e432aa0205082210e432aa0205082110e432aa0205081710e432aa0205082310e432aa0205082b10e432aa0205083110e432aa0205083910e432aa0205083d10e432aa0205084110e432aa0205084910e432aa0205084d10e432aa0205081b10e432aa0205083410e432aa0205082810e432aa0205082910e432c2022812041a0201041a0508501201631a060851120265661a0f0848120b0104050607f1a802f4a8022200ea0204100118018a03009203009803b7919db30ba20319c2b27854e19687e197a95fe191ade192aae197a95945e19687e20301523a011a403e50056801721e313732303237323231313638373535353930315f736f3278687a61366e347801820103303b30880180e0aecdacceba8e19a20100b00114ea010449444332fa011e313732303237323231313638373535383330335f71356f79736b3934716d")
-         self.client0500.send(data)
-         
-    def gen_squadpro(self):
          data = bytes.fromhex(f"050000030608{self.EncryptedPlayerid}100520082af90508{self.EncryptedPlayerid}1af00508{self.EncryptedPlayerid}12024d451801200432f50408{self.EncryptedPlayerid}1211e385a4e1b49ce1b498e385a4e1afa4ccb81a024d4520a4fda7b40628423084cbd13042188993e660c0bcce64e796a361fb9ae061948b8866e8b6ce64480150d70158851568e4b58fae037a0a9cd2cab00392d0f2b20382012608efdaf1eb04120cd8afd98ad8b1d8acd8a7d985180720f087d4f0042a0808ca9d85f304100392010b010307090a0b12191a1e209801dd01a0017fba010b08d6f9e6a202100118d702c00101e80105f0010e880203920208ae2d8d15ba29b810aa0208080110cc3a18a01faa0208080210f02e188827aa020a080f108e781888272001aa0205081710a14faa0205081810df31aa0205081c108f31aa0205082010c430aa0205082110cb30aa0205082210dd31aa0205082b10f02eaa0205083110f02eaa0205084910f936aa0205081a108e78aa02050823108e78aa02050839108e78aa0205083d108e78aa02050841108e78aa0205084d10e432aa0205081b108e78aa02050834108e78aa0205082810e432aa0205082910e432c2026012031a01011a3f084812110104050607f1a802f4a802f2a802f3a8021a0d08f1a802100318ec0220c3ca011a0d08f2a802100318940320a3e8041a0a08f3a802100220fec2011a0508501201631a060851120265662209120765890eed0ed904d802a8a38daf03ea020410011801f2020b0883cab5ee0110b00218018a030092032a0a13080310f906180f201528f0bbacb40632024d450a13080610a50e180f200a28f0bbacb40632024d459803fdb4b4b20ba203044d454523a80368b00302b80301c203080828100118032001c20308081a100f1803200cca030a0801109b85b5b4061801ca030a080910abf6b0b4061801d003013a011a403e50056801721e313732303331393634393738313931313136365f616471383367366864717801820103303b30880180e0aee990ede78e19a20100b00114ea010449444331fa011e313732303331393634393738313931353431355f317475736c316869396a")
          self.client0500.send(data)
+         
     def fake_friend(self, client, id: str):
     #If player Offline send
         if len(id) == 8:
@@ -480,68 +416,6 @@ class Proxy:
             print(id)
             print(packet)
 
-
-            
-
-            
-            
-
-     
-         
-         
-    def try_id(self, client, id: str):
-    #If player Offline send
-        if len(id) == 8:
-            # packet = "060000007708d4d7faba1d100620022a6b08cec2f1051a1b5b6666303030305d4e4554332b202020424f545b6666303030305d32024d454049b00101b801e807d801d4d8d0ad03e00101b801e807ea011eefbca8efbca5efbcb2efbcafefbcb3efbca8efbca9efbcadefbca1efa3bf8002fd98a8dd03900201d00201"
-            # packet = re.sub(r'cec2f105', id, packet)
-            # client.send(bytes.fromhex(packet))
-            print("################### ###########")
-            print("Player Offline")
-    
-
-    # Else if player online send
-        elif len(id) == 10:            
-            packet = "060000006f08d4d7faba1d100620022a6308fb9db9ae061a1c5b3030464630305d2b2be385a4434f44455820205b3030464630305d32024d454040b00113b801e71cd801d4d8d0ad03e00191db8dae03ea010a5a45522d49534b494e47f00101f801911a8002fd98a8dd03900201d0020ad80221"
-            
-            
-
-        
-            id_add = id
-            data = bytes.fromhex(f"050000002008{id_add}100520162a1408aae2cafb0210d7c2bbb1032a0608{id_add}") 
-          #  data2 = bytes.fromhex(f"120000013808{self.EncryptedPlayerid}101220022aab0208{id_add}10{self.EncryptedPlayerid}18022889e7aba8063803428c017b22636f6e74656e74223a22545f32365f415f504f5f4d45535f31222c22697352657175657374223a747275652c2269734163636570746564223a66616c73652c22726561736f6e223a302c2274696d65223a302c2267616d65537461727454696d65223a302c226d617463684d6f6465223a302c2267616d654d6f6465223a302c226d61704944223a307d4a2c0a15d981d8b1d8b5d9875fd8b3d8b9d98ad8afd9873a2910b6c58fae0318bea9d2ad0320d90128d9aff8b1035202656e6a520a4c68747470733a2f2f67726170682e66616365626f6f6b2e636f6d2f76392e302f3731363937353732323035333131382f706963747572653f77696474683d313630266865696768743d31363010011801")
-         #   data = re.sub(r'fb9db9ae06', id, data)
-            
-         
-            packet = re.sub(r'fb9db9ae06', id, packet)
-            print(packet)
-            print("##########PACKET FRIEND###########")
-            client.send(bytes.fromhex(packet))
-         
-         
-            self.client0500.send(data)
-            
-            print("##########YOUR UID###########")
-            print(self.EncryptedPlayerid)
-            print("##########TARGET UID###########")
-            print(id)
-            print("##########DATA #1###########")
-            print(data)
-            print("Sucessfully ")
-            print("##########DATA #1###########")
-       #    self.client0500.send(data2)
-      #      print(data2)
-            print("Sucessfully ")
-            
-
-              
-            
-            
-        else:
-            print(id)
-            print("Bad error \n Last Else")
-
-    def gen_squad_5(self):
-         packet_5 = f"05000001ff08{self.EncryptedPlayerid}1005203a2af20308{self.EncryptedPlayerid}12024d451801200432f70208{self.EncryptedPlayerid}1209424c52585f4d6f642b1a024d4520d78aa5b40628023085cbd1303832421880c38566fa96e660c19de061d998a36180a89763aab9ce64480150c90158e80792010801090a12191a1e209801c901c00101e801018802039202029603aa0208080110e43218807daa0207080f10e4322001aa0205080210e432aa0205081810e432aa0205081a10e432aa0205081c10e432aa0205082010e432aa0205082210e432aa0205082110e432aa0205081710e432aa0205082310e432aa0205082b10e432aa0205083110e432aa0205083910e432aa0205083d10e432aa0205084110e432aa0205084910e432aa0205084d10e432aa0205081b10e432aa0205083410e432aa0205082810e432aa0205082910e432c2022812041a0201041a0508501201631a060851120265661a0f0848120b0104050607f1a802f4a8022200ea0204100118018a03009203009803b7919db30ba20319c2b27854e19687e197a95fe191ade192aae197a95945e19687e20301523a011a403e50056801721e313732303237323231313638373535353930315f736f3278687a61366e347801820103303b30880180e0aecdacceba8e19a20100b00114ea010449444332fa011e313732303237323231313638373535383330335f71356f79736b3934716d"
          self.client0500.send(bytes.fromhex(packet_5))
     def adding_1mG_16kD(self):
         packet_1m_16k_GD = "080000001608edaae28710100820022a0a08bfda5b10fe7d18c801"
@@ -557,30 +431,7 @@ class Proxy:
                     yout_list = [yout1,yout2,yout3,yout4,yout5,yout6,yout7,yout8,yout9,yout10,yout11,yout12,yout13,yout14,yout15,yout16,yout17,yout18,yout19,yout20,yout21,yout22,yout23,yout24,yout25,yout26,yout27,yout28,yout29,yout30,yout31,yout32,yout33,yout34,yout35,yout36,yout37,yout38,yout39,yout40,yout41,yout42,yout43,yout44,yout45,yout46,yout47,yout48,yout49,yout50]
                     for y in yout_list:
                     		self.client0500.send(y)
-                    
-    def send_request(self, iddd):
-        url = f"https://fox-encodeuid.onrender.com/encode?uid={iddd}"
-        try:
-            res = requests.get(url)
-            res.raise_for_status()
-            res_json = res.json()
-            id = res_json.get("encode uid")
-            if not id:
-                print(f"Key 'encode uid' not found in response for ID: {iddd}")
-                return
-            dor = f"050000002008{id}100520162a1408aae2cafb0210d7c2bbb1032a0608{id}"
-            try:
-                self.client0500.send(bytes.fromhex(dor))
-                print(f"Sent: {dor}")
-            except ConnectionResetError:
-                print("Connection reset by peer. Retrying or handling error...")
-            except ValueError as e:
-                print(f"Error sending {dor}: {e}")
-        except requests.exceptions.RequestException as e:
-            print(f"Request failed for ID {iddd}: {e}")
-        except json.JSONDecodeError:
-            print(f"Invalid JSON response for ID {iddd}: {res.text}")
-            
+                   
             
     def handle_id(self, iddd):
         if '***' in iddd:
@@ -695,7 +546,7 @@ class Proxy:
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), f"\n[b]Region : {b['Account Region']}\nName : {b['Name']}\n", 0.2)).start()
                 #ROOM FEATURES!
                 if bot_true and  b"/room" in dataS:
-                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]ON Spam Room", 0.2)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][7cfc00]ON Spam Room", 0.2)).start()
                     spam_room = True
                 if  bot_true and b"/-room" in dataS:
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][i][c][7cfc00]OFF Spam Room", 0.2)).start()
@@ -758,7 +609,7 @@ class Proxy:
                     
                     
                 if bot_true and  b"/help" in dataS:
-                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][FFF000]Welcome Foxybot v3\n   Commands :", 0.1)).start()
+                    threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), f"{generate_random_color()}Welcome Foxybot v3\n   Commands :", 0.1)).start()
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b]/d5 --> 5 Sqoud\n/d6 --> 6 Sqoud", 0.3)).start()
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b]/spysqd --> Invisible Sqd\n/spyroom --> Invisible Room", 0.5)).start()
                     threading.Thread(target=send_msg, args=(self.client1200, dataS.hex(), "[b][7cfc00]/spam --> Invitation Spam\n /room --> Spam Room", 0.7)).start()
@@ -874,8 +725,8 @@ class Proxy:
             if b"/spysqd" in dataS:#OP4
                 Thread(target=self.squad_rom_invisible).start()
             if b"/-spysqd" in dataS:  #OP4
-               # self.remote0500.send(dataC)
-                print("OFF")
+                self.remote0500.send(dataC)
+                
             
             
             if b"/invspam" in dataS: #OP5
@@ -981,84 +832,7 @@ class Proxy:
                 else:
                     print("Error")
  
- 
-                
-            
-
-                
-            # if b"OP2" in dataS and Free ==True:
-                # sock.sendto("ON".encode(),addreOP)
-            # else:
-            
-                # if b"OP2" in dataS and Free ==False:
-                    # sock.sendto("OFF".encode(),addreOP)
-                
-                
-            # if b"OP3" in dataS and Free ==True:
-                # sock.sendto("ON".encode(),addreOP)
-            # else:   
-                # if b"OP3" in dataS and Free ==False:
-                    # sock.sendto("OFF".encode(),addreOP)
-                
-                
-            # if b"OP4" in dataS and Free ==True:
-                # sock.sendto("ON".encode(),addreOP)
-                
-            # else:    
-                # if b"OP4" in dataS and Free ==False:
-                    # sock.sendto("OFF".encode(),addreOP)
-            
-            
-            # if b"OP5" in dataS and Free ==True:
-                # sock.sendto("ON".encode(),addreOP)
-            
-            # else:
-                 # if b"OP5" in dataS and Free ==False:
-                    # sock.sendto("OFF".encode(),addreOP)
-                
-                
-            # if b"OP6" in dataS and Free ==True:
-                # sock.sendto("ON".encode(),addreOP)
-                
-            # else:
-                 # if b"OP6" in dataS and Free ==False:
-                    # sock.sendto("OFF".encode(),addreOP)
-                
-               
-            # if b"OP7" in dataS and Free ==True:
-                # sock.sendto("ON".encode(),addreOP)
-                
-            # else:   
-                # if b"OP7" in dataS and Free ==False:
-                    # sock.sendto("OFF".encode(),addreOP)
-                
-                
-            # if b"OP8" in dataS and Free ==True:
-                # sock.sendto("ON".encode(),addreOP)
-                
-            # else:
-                # if b"OP8" in dataS and Free ==False:
-                    # sock.sendto("OFF".encode(),addreOP)
-                
-                
-                
-            # if b"OP9" in dataS and Premium ==True:
-                # sock.sendto("ON".encode(),addreOP)
-                
-            # else:
-                # if b"OP9" in dataS and Premium ==False:
-                    # sock.sendto("OFF".encode(),addreOP)
-                
-                
-            
-            # if b"OP10" in dataS and Premium ==True:
-                # sock.sendto("ON".encode(),addreOP)
-                
-            # else:
-                 # if b"OP10" in dataS and Premium ==False:
-                    # sock.sendto("OFF".encode(),addreOP)
-                
-                
+      
     def SpamAntiKick( self ):
         while self.spamantikick==True:
             try:

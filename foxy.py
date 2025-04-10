@@ -58,10 +58,10 @@ def check_ip_on_device(expected_ip):
         return "Could not determine device IP." 
         Premium = False
     if is_valid_ipv4(expected_ip) and device_ip == expected_ip:
-        return "Correct IP Adress"
+        print("Correct IP Adress")
         Premium = True
     elif is_valid_ipv4(expected_ip): 
-        return "Incorrect IP Adress"
+        print("Uncorrect IP Adress")
         Premium = False
     else: 
         return "Invalid expected IP format."

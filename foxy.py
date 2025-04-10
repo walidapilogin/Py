@@ -11,7 +11,7 @@ from datetime import datetime
 import netifaces
 import platform
 Premium = False
-Free = False
+Free = True
 ####################################
 
 def is_valid_ipv4(ip_address):

@@ -8,7 +8,15 @@ import struct
 import random
 import urllib3
 from datetime import datetime
+
+import platform
+
 ####################################
+
+
+
+
+
 def adjust_text_length(text, target_length=22, fill_char="00"):
     # إذا كان النص أطول من العدد المستهدف من الأحرف
     if len(text) > target_length:
@@ -22,6 +30,54 @@ def adjust_text_length(text, target_length=22, fill_char="00"):
     # إذا كان النص بالفعل بطول العدد المستهدف من الأحرف
     else:
         return text
+
+
+def is_valid_ipv4(ip_address):
+    try:
+       socket.inet_aton(ip_address) # Efficiently checks IPv4 validity
+       return True
+    except OSError:
+       return False
+
+def get_device_ip():
+
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80)) 
+        ip_address = s.getsockname()[0]
+        s.close()
+        return ip_address
+    except Exception as e:
+        print(f"Error getting IP: {e}")
+        return None
+
+def check_ip_on_device(expected_ip):
+    device_ip = get_device_ip()
+
+    if device_ip is None:
+        return "Could not determine device IP." 
+        Premium = False
+    if is_valid_ipv4(expected_ip) and device_ip == expected_ip:
+        return "Correct IP Adress"
+        Premium = True
+    elif is_valid_ipv4(expected_ip): 
+        return "Incorrect IP Adress"
+        Premium = False
+    else: 
+        return "Invalid expected IP format."
+        Premium = False
+
+
+
+expected_ip = "192.168.1.103" 
+
+
+result = check_ip_on_device(expected_ip)
+print(result)
+
+
+# ... (Rest of your app code)
+
 
 def generate_random_color():
 	color_list = [
@@ -288,7 +344,7 @@ def adjust_text_length(text, target_length=22, fill_char="20"):
         return text
 ####################################
 
-Premium = True
+Premium = False
 Free = False
 
 fake_friend = False

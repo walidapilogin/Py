@@ -10,8 +10,8 @@ import urllib3
 from datetime import datetime
 import netifaces
 import platform
-Premium = False
-Free = True
+Premium = True
+Free = False
 ####################################
 
 def is_valid_ipv4(ip_address):
@@ -22,39 +22,17 @@ def is_valid_ipv4(ip_address):
        return False
 
 
-
 def get_device_ip():
-    ip_address = None
-
+    # """Attempts to get the device's IP address."""
     try:
-
-        interfaces = netifaces.interfaces()
-        for iface_name in interfaces:
-            addrs = netifaces.ifaddresses(iface_name)
-            if netifaces.AF_INET in addrs: 
-                for addr in addrs[netifaces.AF_INET]:
-                    ip = addr['addr']
-                    if ip != '127.0.0.1':
-                        ip_address = ip
-                        break
-            if ip_address:
-                break
-
-    except (ImportError, OSError) as e:
-        print(f"Error using netifaces: {e}. Falling back to basic method...")
-
-        try: 
-             s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-             s.connect(("8.8.8.8", 80))
-             ip_address = s.getsockname()[0]
-             s.close()
-
-        except Exception as e:
-             print(f"Error getting IP: {e}")
-
-    return ip_address
-
-
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80)) # Connect to Google's DNS
+        ip_address = s.getsockname()[0]
+        s.close()
+        return ip_address
+    except Exception as e:
+        print(f"Error getting IP: {e}")
+        return None
 
 def check_and_enable_premium(expected_ips): 
     Premium = False
@@ -1016,12 +994,7 @@ class Proxy:
             except Exception as e:
                 pass     
                 
-def activ():
-    try:
-       print("Done")
-       Premium = True
-    except:
-        pass
+
                
 def start_bot():
     try:

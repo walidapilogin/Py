@@ -922,15 +922,15 @@ class Proxy:
                  Thread(target=self.adding_gold).start()
                  
                  
-            if b"/activ2" in dataS and Premium ==True: 
+            if b"/activ2" in dataS:
                  print("OFFLINE")
-            if b"/-activ2" in dataS and Premium ==True:  #OP9
+            if b"/-activ2" in dataS:  #OP9
                  print("OFFLINE")
                  
                  
-            if b"/activ3" in dataS and Premium ==True:
+            if b"/activ3" in dataS:
                  print("OFFLINE")
-            if b"/-activ3" in dataS and Premium ==True: #OP10
+            if b"/-activ3" in dataS: #OP10
                  print("OFFLINE")
                  
                  

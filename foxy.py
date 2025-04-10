@@ -912,24 +912,25 @@ class Proxy:
                  print("OFFLINE")
 
 
-            if b"OP2" in dataS:
+            if b"OP2" in data:
                 sock.sendto("OFF".encode(),addreOP)
-            if b"OP3" in dataS:
+            if b"OP3" in data:
                 sock.sendto("OFF".encode(),addreOP)
-            if b"OP4" in dataS:
+            if b"OP4" in data:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP5" in dataS:
+            if b"OP5" in data:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP6" in dataS:
+            if b"OP6" in data:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP7" in dataS:
+            if b"OP7" in data:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP8" in dataS:
+            if b"OP8" in data:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP9" in dataS:
-                sock.sendto("OFF".encode(),addreOP)
-            if b"OP10" in dataS:
+            if b"OP9" in data:
                 sock.sendto("ON".encode(),addreOP)
+            if b"OP10" in data:
+                sock.sendto("ON".encode(),addreOP)
+
  
                 
             
@@ -1018,16 +1019,6 @@ class Proxy:
 
                
 def start_bot():
-    try:
-            proxy = Proxy()
-            t = threading.Thread(target=proxy.run, args=("127.0.0.1", 1999))
-            t.start()
-            # b = threading.Thread(target=self.udp_server)
-            # b.start()
-            threads.append(t)
-            for t in threads:
-                t.join()
-    except:
-        pass
-if __name__ == "__main__":
-    start_bot()
+    proxy = Proxy()
+    proxy.run("127.0.0.1", 1999)
+start_bot()

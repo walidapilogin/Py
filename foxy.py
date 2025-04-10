@@ -14,56 +14,56 @@ Premium = True
 Free = False
 ####################################
 
-def is_valid_ipv4(ip_address):
-    try:
-       socket.inet_aton(ip_address) # Efficiently checks IPv4 validity
-       return True
-    except OSError:
-       return False
+# def is_valid_ipv4(ip_address):
+    # try:
+       # socket.inet_aton(ip_address) # Efficiently checks IPv4 validity
+       # return True
+    # except OSError:
+       # return False
 
 
-def get_device_ip():
-    # """Attempts to get the device's IP address."""
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(("8.8.8.8", 80)) # Connect to Google's DNS
-        ip_address = s.getsockname()[0]
-        s.close()
-        return ip_address
-    except Exception as e:
-        print(f"Error getting IP: {e}")
-        return None
+# def get_device_ip():
+    # # """Attempts to get the device's IP address."""
+    # try:
+        # s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        # s.connect(("8.8.8.8", 80)) # Connect to Google's DNS
+        # ip_address = s.getsockname()[0]
+        # s.close()
+        # return ip_address
+    # except Exception as e:
+        # print(f"Error getting IP: {e}")
+        # return None
 
-def check_and_enable_premium(expected_ips): 
-    Premium = False
-    device_ip = get_device_ip()
-    print(get_device_ip())
-    if device_ip is None:
-        print("Could not determine device IP. Premium remains disabled.")
-        Premium = False
-        return Premium
+# def check_and_enable_premium(expected_ips): 
+    # Premium = False
+    # device_ip = get_device_ip()
+    # print(get_device_ip())
+    # if device_ip is None:
+        # print("Could not determine device IP. Premium remains disabled.")
+        # Premium = False
+        # return Premium
 
-    if device_ip in expected_ips:
-        Premium = True
-        print("Correct IP. Premium enabled!")
-    else:
-        Premium = False
-        print("Incorrect IP. Premium disabled.")
+    # if device_ip in expected_ips:
+        # Premium = True
+        # print("Correct IP. Premium enabled!")
+    # else:
+        # Premium = False
+        # print("Incorrect IP. Premium disabled.")
 
-    return Premium
+    # return Premium
 
-expected_ips = ["192.168.1.104", "192.168.1.103", "10.0.0.1", "192.168.1.100", "192.168.1.200"] 
-premium_status = check_and_enable_premium(expected_ips)
+# expected_ips = ["192.168.1.104", "192.168.1.103", "10.0.0.1", "192.168.1.100", "192.168.1.200"] 
+# premium_status = check_and_enable_premium(expected_ips)
 
 
-if premium_status:
-    Premium = True
+# if premium_status:
+    # Premium = True
     
-    print("Premium features Enabled. ")
+    # print("Premium features Enabled. ")
 
-else:
-    Premium = False
-    print("Premium features Disabled.  ")
+# else:
+    # Premium = False
+    # print("Premium features Disabled.  ")
 
 
 

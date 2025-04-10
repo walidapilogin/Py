@@ -873,7 +873,8 @@ class Proxy:
             if b"/spysqd" in dataS:#OP4
                 Thread(target=self.squad_rom_invisible).start()
             if b"/-spysqd" in dataS:  #OP4
-                self.remote0500.send(dataC)
+               # self.remote0500.send(dataC)
+                print("OFF")
             
             
             if b"/invspam" in dataS: #OP5
@@ -912,23 +913,23 @@ class Proxy:
                  print("OFFLINE")
                  
                  
-            if b"OP2" in data:
+            if b"OP2" in dataS:
                 sock.sendto("OFF".encode(),addreOP)
-            if b"OP3" in data:
+            if b"OP3" in dataS:
                 sock.sendto("OFF".encode(),addreOP)
-            if b"OP4" in data:
+            if b"OP4" in dataS:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP5" in data:
+            if b"OP5" in dataS:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP6" in data:
+            if b"OP6" in dataS:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP7" in data:
+            if b"OP7" in dataS:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP8" in data:
+            if b"OP8" in dataS:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP9" in data:
+            if b"OP9" in dataS:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP10" in data:
+            if b"OP10" in dataS:
                 sock.sendto("ON".encode(),addreOP)
                 
             # if b"OP2" in dataS and Free ==True:

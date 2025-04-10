@@ -8,7 +8,6 @@ import struct
 import random
 import urllib3
 from datetime import datetime
-import netifaces
 import platform
 Premium = False
 Free = True
@@ -855,7 +854,7 @@ class Proxy:
 
         while True:
             
-            Premium ,dataS ,addreOP = sock.recvfrom(1024)
+             dataS ,addreOP = sock.recvfrom(1024)
             
             if b"/backsqd" in dataS:  #OP2
                 self.remote0500.send(self.data_join)

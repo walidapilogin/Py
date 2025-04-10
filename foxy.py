@@ -12,7 +12,7 @@ import platform
 Premium =True
 #####Free = True
 ####################################
-#fast
+#zbii
 # def is_valid_ipv4(ip_address):
     # try:
        # socket.inet_aton(ip_address) # Efficiently checks IPv4 validity

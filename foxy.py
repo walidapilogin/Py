@@ -8,6 +8,9 @@ import struct
 import random
 import urllib3
 from datetime import datetime
+import platform
+Premium = False
+Free = True
 ####################################
 
 # def is_valid_ipv4(ip_address):
@@ -910,23 +913,23 @@ class Proxy:
                  print("OFFLINE")
 
 
-            if b"OP2" in data:
+            if b"OP2" in dataS:
                 sock.sendto("OFF".encode(),addreOP)
-            if b"OP3" in data:
+            if b"OP3" in dataS:
                 sock.sendto("OFF".encode(),addreOP)
-            if b"OP4" in data:
+            if b"OP4" in dataS:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP5" in data:
+            if b"OP5" in dataS:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP6" in data:
+            if b"OP6" in dataS:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP7" in data:
+            if b"OP7" in dataS:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP8" in data:
+            if b"OP8" in dataS:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP9" in data:
+            if b"OP9" in dataS:
                 sock.sendto("ON".encode(),addreOP)
-            if b"OP10" in data:
+            if b"OP10" in dataS:
                 sock.sendto("ON".encode(),addreOP)
 
  

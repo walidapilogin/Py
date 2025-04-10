@@ -24,29 +24,28 @@ def is_valid_ipv4(ip_address):
 
 
 def get_device_ip():
-    # """Gets the device's IP address, handling various failure scenarios."""
     ip_address = None
 
     try:
-        # Try netifaces first (more reliable)
-        interfaces = netifaces.interfaces() # Get all network interfaces
+
+        interfaces = netifaces.interfaces()
         for iface_name in interfaces:
             addrs = netifaces.ifaddresses(iface_name)
-            if netifaces.AF_INET in addrs: # Check for IPv4 addresses
+            if netifaces.AF_INET in addrs: 
                 for addr in addrs[netifaces.AF_INET]:
                     ip = addr['addr']
-                    if ip != '127.0.0.1': # Exclude loopback address
+                    if ip != '127.0.0.1':
                         ip_address = ip
-                        break # Use the first non-loopback IP found
-            if ip_address: # Exit outer loop also after IP is found.
+                        break
+            if ip_address:
                 break
 
-    except (ImportError, OSError) as e: # Handle import/netifaces errors.
+    except (ImportError, OSError) as e:
         print(f"Error using netifaces: {e}. Falling back to basic method...")
 
-        try: # Fallback to the simpler method in case netifaces isn't available.
+        try: 
              s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-             s.connect(("8.8.8.8", 80)) # Use 1.1.1.1 or other public DNS as alternatives
+             s.connect(("8.8.8.8", 80))
              ip_address = s.getsockname()[0]
              s.close()
 
@@ -54,9 +53,6 @@ def get_device_ip():
              print(f"Error getting IP: {e}")
 
     return ip_address
-
-
-# ... (rest of your code)
 
 
 
@@ -926,15 +922,15 @@ class Proxy:
                  Thread(target=self.adding_gold).start()
                  
                  
-            if b"/activ2" in dataS:  #OP9
+            if b"/activ2" in dataS and Premium ==True: 
                  print("OFFLINE")
-            if b"/-activ2" in dataS:  #OP9
+            if b"/-activ2" in dataS and Premium ==True:  #OP9
                  print("OFFLINE")
                  
                  
-            if b"/activ3" in dataS:#OP10
+            if b"/activ3" in dataS and Premium ==True:
                  print("OFFLINE")
-            if b"/-activ3" in dataS: #OP10
+            if b"/-activ3" in dataS and Premium ==True: #OP10
                  print("OFFLINE")
                  
                  

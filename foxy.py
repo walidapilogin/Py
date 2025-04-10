@@ -14,56 +14,56 @@ Premium = True
 Free = False
 ####################################
 
-# def is_valid_ipv4(ip_address):
-    # try:
-       # socket.inet_aton(ip_address) # Efficiently checks IPv4 validity
-       # return True
-    # except OSError:
-       # return False
+def is_valid_ipv4(ip_address):
+    try:
+       socket.inet_aton(ip_address) # Efficiently checks IPv4 validity
+       return True
+    except OSError:
+       return False
 
 
-# def get_device_ip():
-    # # """Attempts to get the device's IP address."""
-    # try:
-        # s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        # s.connect(("8.8.8.8", 80)) # Connect to Google's DNS
-        # ip_address = s.getsockname()[0]
-        # s.close()
-        # return ip_address
-    # except Exception as e:
-        # print(f"Error getting IP: {e}")
-        # return None
+def get_device_ip():
+    # """Attempts to get the device's IP address."""
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80)) # Connect to Google's DNS
+        ip_address = s.getsockname()[0]
+        s.close()
+        return ip_address
+    except Exception as e:
+        print(f"Error getting IP: {e}")
+        return None
 
-# def check_and_enable_premium(expected_ips): 
-    # Premium = False
-    # device_ip = get_device_ip()
-    # print(get_device_ip())
-    # if device_ip is None:
-        # print("Could not determine device IP. Premium remains disabled.")
-        # Premium = False
-        # return Premium
+def check_and_enable_premium(expected_ips): 
+    Premium = False
+    device_ip = get_device_ip()
+    print(get_device_ip())
+    if device_ip is None:
+        print("Could not determine device IP. Premium remains disabled.")
+        Premium = False
+        return Premium
 
-    # if device_ip in expected_ips:
-        # Premium = True
-        # print("Correct IP. Premium enabled!")
-    # else:
-        # Premium = False
-        # print("Incorrect IP. Premium disabled.")
+    if device_ip in expected_ips:
+        Premium = True
+        print("Correct IP. Premium enabled!")
+    else:
+        Premium = False
+        print("Incorrect IP. Premium disabled.")
 
-    # return Premium
+    return Premium
 
-# expected_ips = ["192.168.1.104", "192.168.1.103", "10.0.0.1", "192.168.1.100", "192.168.1.200"] 
-# premium_status = check_and_enable_premium(expected_ips)
+expected_ips = ["192.168.1.104", "192.168.1.103", "10.0.0.1", "192.168.1.100", "192.168.1.200"] 
+premium_status = check_and_enable_premium(expected_ips)
 
 
-# if premium_status:
-    # Premium = True
+if premium_status:
+    Premium = True
     
-    # print("Premium features Enabled. ")
+    print("Premium features Enabled. ")
 
-# else:
-    # Premium = False
-    # print("Premium features Disabled.  ")
+else:
+    Premium = False
+    print("Premium features Disabled.  ")
 
 
 
@@ -856,6 +856,7 @@ class Proxy:
         while True:
             
             dataS ,addreOP = sock.recvfrom(1024)
+            handle_data(dataS, sock, addr, premium_status)
             
             if b"/backsqd" in dataS:  #OP2
                 self.remote0500.send(self.data_join)
@@ -912,97 +913,108 @@ class Proxy:
             if b"/-activ3" in dataS: #OP10
                  print("OFFLINE")
                  
-                 
-            # if b"OP2" in dataS:
-                # sock.sendto("OFF".encode(),addreOP)
-            # if b"OP3" in dataS:
-                # sock.sendto("OFF".encode(),addreOP)
-            # if b"OP4" in dataS:
+def handle_data(dataS, sock, addreOP, premium_status):
+
+            if b"OP2" in dataS:
+                sock.sendto("OFF".encode(),addreOP)
+            if b"OP3" in dataS:
+                sock.sendto("OFF".encode(),addreOP)
+            if b"OP4" in dataS:
+                sock.sendto("ON".encode(),addreOP)
+            if b"OP5" in dataS:
+                sock.sendto("ON".encode(),addreOP)
+            if b"OP6" in dataS:
+                sock.sendto("ON".encode(),addreOP)
+            if b"OP7" in dataS:
+                sock.sendto("ON".encode(),addreOP)
+            if b"OP8" in dataS:
+                sock.sendto("ON".encode(),addreOP)
+            if b"OP9" in dataS:
+                if premium_status:
+                    sock.sendto("ON".encode(),addreOP)
+                else:
+                    sock.sendto("OFF".encode(),addreOP)
+            if b"OP10" in dataS:
+                if premium_status:
+                    sock.sendto("ON".encode(),addreOP)
+                else:
+                    sock.sendto("OFF".encode(),addreOP)
+                
+                
+
+
+                
+            # if b"OP2" in dataS and Free ==True:
                 # sock.sendto("ON".encode(),addreOP)
-            # if b"OP5" in dataS:
+            # else:
+            
+                # if b"OP2" in dataS and Free ==False:
+                    # sock.sendto("OFF".encode(),addreOP)
+                
+                
+            # if b"OP3" in dataS and Free ==True:
                 # sock.sendto("ON".encode(),addreOP)
-            # if b"OP6" in dataS:
+            # else:   
+                # if b"OP3" in dataS and Free ==False:
+                    # sock.sendto("OFF".encode(),addreOP)
+                
+                
+            # if b"OP4" in dataS and Free ==True:
                 # sock.sendto("ON".encode(),addreOP)
-            # if b"OP7" in dataS:
+                
+            # else:    
+                # if b"OP4" in dataS and Free ==False:
+                    # sock.sendto("OFF".encode(),addreOP)
+            
+            
+            # if b"OP5" in dataS and Free ==True:
                 # sock.sendto("ON".encode(),addreOP)
-            # if b"OP8" in dataS:
+            
+            # else:
+                 # if b"OP5" in dataS and Free ==False:
+                    # sock.sendto("OFF".encode(),addreOP)
+                
+                
+            # if b"OP6" in dataS and Free ==True:
                 # sock.sendto("ON".encode(),addreOP)
+                
+            # else:
+                 # if b"OP6" in dataS and Free ==False:
+                    # sock.sendto("OFF".encode(),addreOP)
+                
+               
+            # if b"OP7" in dataS and Free ==True:
+                # sock.sendto("ON".encode(),addreOP)
+                
+            # else:   
+                # if b"OP7" in dataS and Free ==False:
+                    # sock.sendto("OFF".encode(),addreOP)
+                
+                
+            # if b"OP8" in dataS and Free ==True:
+                # sock.sendto("ON".encode(),addreOP)
+                
+            # else:
+                # if b"OP8" in dataS and Free ==False:
+                    # sock.sendto("OFF".encode(),addreOP)
+                
+                
+                
             # if b"OP9" in dataS and Premium ==True:
                 # sock.sendto("ON".encode(),addreOP)
+                
+            # else:
+                # if b"OP9" in dataS and Premium ==False:
+                    # sock.sendto("OFF".encode(),addreOP)
+                
+                
+            
             # if b"OP10" in dataS and Premium ==True:
                 # sock.sendto("ON".encode(),addreOP)
                 
-            if b"OP2" in dataS and Free ==True:
-                sock.sendto("ON".encode(),addreOP)
-            else:
-            
-                if b"OP2" in dataS and Free ==False:
-                    sock.sendto("OFF".encode(),addreOP)
-                
-                
-            if b"OP3" in dataS and Free ==True:
-                sock.sendto("ON".encode(),addreOP)
-            else:   
-                if b"OP3" in dataS and Free ==False:
-                    sock.sendto("OFF".encode(),addreOP)
-                
-                
-            if b"OP4" in dataS and Free ==True:
-                sock.sendto("ON".encode(),addreOP)
-                
-            else:    
-                if b"OP4" in dataS and Free ==False:
-                    sock.sendto("OFF".encode(),addreOP)
-            
-            
-            if b"OP5" in dataS and Free ==True:
-                sock.sendto("ON".encode(),addreOP)
-            
-            else:
-                 if b"OP5" in dataS and Free ==False:
-                    sock.sendto("OFF".encode(),addreOP)
-                
-                
-            if b"OP6" in dataS and Free ==True:
-                sock.sendto("ON".encode(),addreOP)
-                
-            else:
-                 if b"OP6" in dataS and Free ==False:
-                    sock.sendto("OFF".encode(),addreOP)
-                
-               
-            if b"OP7" in dataS and Free ==True:
-                sock.sendto("ON".encode(),addreOP)
-                
-            else:   
-                if b"OP7" in dataS and Free ==False:
-                    sock.sendto("OFF".encode(),addreOP)
-                
-                
-            if b"OP8" in dataS and Free ==True:
-                sock.sendto("ON".encode(),addreOP)
-                
-            else:
-                if b"OP8" in dataS and Free ==False:
-                    sock.sendto("OFF".encode(),addreOP)
-                
-                
-                
-            if b"OP9" in dataS and Premium ==True:
-                sock.sendto("ON".encode(),addreOP)
-                
-            else:
-                if b"OP9" in dataS and Premium ==False:
-                    sock.sendto("OFF".encode(),addreOP)
-                
-                
-            
-            if b"OP10" in dataS and Premium ==True:
-                sock.sendto("ON".encode(),addreOP)
-                
-            else:
-                 if b"OP10" in dataS and Premium ==False:
-                    sock.sendto("OFF".encode(),addreOP)
+            # else:
+                 # if b"OP10" in dataS and Premium ==False:
+                    # sock.sendto("OFF".encode(),addreOP)
                 
                 
     def SpamAntiKick( self ):

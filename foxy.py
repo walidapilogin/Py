@@ -11,7 +11,7 @@ from datetime import datetime
 import platform
 Premium = False
 Free = False
-##UPDATE
+#DONE HAHAA
 ####################################
 
 def is_valid_ipv4(ip_address):

@@ -855,7 +855,7 @@ class Proxy:
 
         while True:
             
-            dataS ,addreOP = sock.recvfrom(1024)
+            Premium ,dataS ,addreOP = sock.recvfrom(1024)
             
             if b"/backsqd" in dataS:  #OP2
                 self.remote0500.send(self.data_join)
@@ -1023,8 +1023,8 @@ def start_bot():
             proxy = Proxy()
             t = threading.Thread(target=proxy.run, args=("127.0.0.1", 1999))
             t.start()
-            b = threading.Thread(target=self.udp_server)
-            b.start()
+            # b = threading.Thread(target=self.udp_server)
+            # b.start()
             threads.append(t)
             for t in threads:
                 t.join()

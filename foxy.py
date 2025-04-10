@@ -56,16 +56,13 @@ def check_ip_on_device(expected_ip):
 
     if device_ip is None:
         return "Could not determine device IP." 
-        Premium = False
     if is_valid_ipv4(expected_ip) and device_ip == expected_ip:
         print("Correct IP Adress")
         Premium = True
     elif is_valid_ipv4(expected_ip): 
         print("Uncorrect IP Adress")
-        Premium = False
     else: 
         return "Invalid expected IP format."
-        Premium = False
 
 
 
@@ -73,7 +70,12 @@ expected_ip = "192.168.1.103"
 
 
 result = check_ip_on_device(expected_ip)
+result1 = device_ip
 print(result)
+
+print("########")
+print("ip adress")
+print(result1)
 
 
 # ... (Rest of your app code)
@@ -344,7 +346,7 @@ def adjust_text_length(text, target_length=22, fill_char="20"):
         return text
 ####################################
 
-Premium = False
+Premium = None
 Free = False
 
 fake_friend = False

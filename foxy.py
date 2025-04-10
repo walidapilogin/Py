@@ -70,12 +70,11 @@ expected_ip = "192.168.1.103"
 
 
 result = check_ip_on_device(expected_ip)
-result1 = device_ip
+
 print(result)
 
 print("########")
-print("ip adress")
-print(result1)
+
 
 
 # ... (Rest of your app code)

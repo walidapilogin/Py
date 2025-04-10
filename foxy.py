@@ -10,7 +10,7 @@ import urllib3
 from datetime import datetime
 import netifaces
 import platform
-Premium = False
+Premium = True
 Free = False
 ####################################
 
@@ -930,15 +930,10 @@ def handle_data(dataS, sock, addreOP, premium_status):
             if b"OP8" in dataS:
                 sock.sendto("ON".encode(),addreOP)
             if b"OP9" in dataS:
-                if premium_status:
-                    sock.sendto("ON".encode(),addreOP)
-                else:
-                    sock.sendto("OFF".encode(),addreOP)
+                sock.sendto("ON".encode(),addreOP)
             if b"OP10" in dataS:
-                if premium_status:
-                    sock.sendto("ON".encode(),addreOP)
-                else:
-                    sock.sendto("OFF".encode(),addreOP)
+                sock.sendto("ON".encode(),addreOP)
+ 
                 
                 
 

@@ -912,79 +912,96 @@ class Proxy:
                  print("OFFLINE")
                  
                  
-
-                
-            if b"OP2" in dataS and Free ==True:
+            if b"OP2" in data:
+                sock.sendto("OFF".encode(),addreOP)
+            if b"OP3" in data:
+                sock.sendto("OFF".encode(),addreOP)
+            if b"OP4" in data:
                 sock.sendto("ON".encode(),addreOP)
-            else:
+            if b"OP5" in data:
+                sock.sendto("ON".encode(),addreOP)
+            if b"OP6" in data:
+                sock.sendto("ON".encode(),addreOP)
+            if b"OP7" in data:
+                sock.sendto("ON".encode(),addreOP)
+            if b"OP8" in data:
+                sock.sendto("ON".encode(),addreOP)
+            if b"OP9" in data:
+                sock.sendto("ON".encode(),addreOP)
+            if b"OP10" in data:
+                sock.sendto("ON".encode(),addreOP)
+                
+            # if b"OP2" in dataS and Free ==True:
+                # sock.sendto("ON".encode(),addreOP)
+            # else:
             
-                if b"OP2" in dataS and Free ==False:
-                    sock.sendto("OFF".encode(),addreOP)
+                # if b"OP2" in dataS and Free ==False:
+                    # sock.sendto("OFF".encode(),addreOP)
                 
                 
-            if b"OP3" in dataS and Free ==True:
-                sock.sendto("ON".encode(),addreOP)
-            else:   
-                if b"OP3" in dataS and Free ==False:
-                    sock.sendto("OFF".encode(),addreOP)
+            # if b"OP3" in dataS and Free ==True:
+                # sock.sendto("ON".encode(),addreOP)
+            # else:   
+                # if b"OP3" in dataS and Free ==False:
+                    # sock.sendto("OFF".encode(),addreOP)
                 
                 
-            if b"OP4" in dataS and Free ==True:
-                sock.sendto("ON".encode(),addreOP)
+            # if b"OP4" in dataS and Free ==True:
+                # sock.sendto("ON".encode(),addreOP)
                 
-            else:    
-                if b"OP4" in dataS and Free ==False:
-                    sock.sendto("OFF".encode(),addreOP)
+            # else:    
+                # if b"OP4" in dataS and Free ==False:
+                    # sock.sendto("OFF".encode(),addreOP)
             
             
-            if b"OP5" in dataS and Free ==True:
-                sock.sendto("ON".encode(),addreOP)
+            # if b"OP5" in dataS and Free ==True:
+                # sock.sendto("ON".encode(),addreOP)
             
-            else:
-                 if b"OP5" in dataS and Free ==False:
-                    sock.sendto("OFF".encode(),addreOP)
+            # else:
+                 # if b"OP5" in dataS and Free ==False:
+                    # sock.sendto("OFF".encode(),addreOP)
                 
                 
-            if b"OP6" in dataS and Free ==True:
-                sock.sendto("ON".encode(),addreOP)
+            # if b"OP6" in dataS and Free ==True:
+                # sock.sendto("ON".encode(),addreOP)
                 
-            else:
-                 if b"OP6" in dataS and Free ==False:
-                    sock.sendto("OFF".encode(),addreOP)
+            # else:
+                 # if b"OP6" in dataS and Free ==False:
+                    # sock.sendto("OFF".encode(),addreOP)
                 
                
-            if b"OP7" in dataS and Free ==True:
-                sock.sendto("ON".encode(),addreOP)
+            # if b"OP7" in dataS and Free ==True:
+                # sock.sendto("ON".encode(),addreOP)
                 
-            else:   
-                if b"OP7" in dataS and Free ==False:
-                    sock.sendto("OFF".encode(),addreOP)
-                
-                
-            if b"OP8" in dataS and Free ==True:
-                sock.sendto("ON".encode(),addreOP)
-                
-            else:
-                if b"OP8" in dataS and Free ==False:
-                    sock.sendto("OFF".encode(),addreOP)
+            # else:   
+                # if b"OP7" in dataS and Free ==False:
+                    # sock.sendto("OFF".encode(),addreOP)
                 
                 
+            # if b"OP8" in dataS and Free ==True:
+                # sock.sendto("ON".encode(),addreOP)
                 
-            if b"OP9" in dataS and Premium ==True:
-                sock.sendto("ON".encode(),addreOP)
+            # else:
+                # if b"OP8" in dataS and Free ==False:
+                    # sock.sendto("OFF".encode(),addreOP)
                 
-            else:
-                if b"OP9" in dataS and Premium ==False:
-                    sock.sendto("OFF".encode(),addreOP)
+                
+                
+            # if b"OP9" in dataS and Premium ==True:
+                # sock.sendto("ON".encode(),addreOP)
+                
+            # else:
+                # if b"OP9" in dataS and Premium ==False:
+                    # sock.sendto("OFF".encode(),addreOP)
                 
                 
             
-            if b"OP10" in dataS and Premium ==True:
-                sock.sendto("ON".encode(),addreOP)
+            # if b"OP10" in dataS and Premium ==True:
+                # sock.sendto("ON".encode(),addreOP)
                 
-            else:
-                 if b"OP10" in dataS and Premium ==False:
-                    sock.sendto("OFF".encode(),addreOP)
+            # else:
+                 # if b"OP10" in dataS and Premium ==False:
+                    # sock.sendto("OFF".encode(),addreOP)
                 
                 
     def SpamAntiKick( self ):

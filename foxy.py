@@ -11,7 +11,7 @@ from datetime import datetime
 import netifaces
 import platform
 Premium = False
-Free = False
+Free = True
 ####################################
 
 def is_valid_ipv4(ip_address):
@@ -74,7 +74,7 @@ def check_and_enable_premium(expected_ips):
 
     return Premium
 
-expected_ips = ["192.168.1.104", "192.168.1.107", "10.0.0.1", "192.168.1.100", "192.168.1.200"] 
+expected_ips = ["192.168.1.104", "192.168.1.103", "10.0.0.1", "192.168.1.100", "192.168.1.200"] 
 premium_status = check_and_enable_premium(expected_ips)
 
 

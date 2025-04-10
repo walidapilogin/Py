@@ -11,7 +11,7 @@ from datetime import datetime
 import platform
 Premium = False
 Free = True
-##UPDATE 1111111
+##UPDATE
 ####################################
 
 def is_valid_ipv4(ip_address):
@@ -416,7 +416,6 @@ class Proxy:
             print(id)
             print(packet)
 
-         self.client0500.send(bytes.fromhex(packet_5))
     def adding_1mG_16kD(self):
         packet_1m_16k_GD = "080000001608edaae28710100820022a0a08bfda5b10fe7d18c801"
         self.client0500.send(bytes.fromhex(packet_1m_16k_GD))
